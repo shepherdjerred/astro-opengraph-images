@@ -1,12 +1,12 @@
 {
-  "name": "astro-satori",
+  "name": "astro-opengraph-images",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
     "prepare": "husky",
     "lint": "eslint src",
     "build": "tsc",
-    "test": "vitest --disable-console-intercept"
+    "test": "vitest"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

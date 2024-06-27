@@ -1,8 +1,8 @@
-import type { AstroIntegration } from "astro";
+import type { APIContext, AstroIntegration } from "astro";
 import * as fs from "fs";
 import { Resvg } from "@resvg/resvg-js";
 import satori, { type SatoriOptions } from "satori";
-import type { Page, RenderFunction } from "./types.js";
+import type { Page, RenderFunction, RenderRouteFunction } from "./types.js";
 
 const defaults = {
   width: 1200,
@@ -63,4 +63,23 @@ async function handlePage({
     },
   });
   fs.writeFileSync(`${dir.pathname}${page.pathname}openGraph.png`, resvg.render().asPng());
+}
+
+export async function handleRoute({
+  context,
+  options,
+  render,
+}: {
+  context: APIContext;
+  options: Options;
+  render: RenderRouteFunction;
+}) {
+  const svg = await satori(render(context), options);
+  const resvg = new Resvg(svg, {
+    fitTo: {
+      mode: "width",
+      value: options.width,
+    },
+  });
+  return resvg.render().asPng();
 }
