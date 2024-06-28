@@ -161,8 +161,8 @@ I consulted these resources while building this library.
 
 Here are some similar libraries using Satori and Astro. I haven't done a feature comparison.
 
-- https://github.com/delucis/astro-og-canvas (This library looks excellent and very user friendly)
 - https://github.com/florian-lefebvre/satori-astro (This library looks excellent)
+- https://github.com/delucis/astro-og-canvas (Doesn't allow arbitrary layouts)
 - https://github.com/thewebforge/astro-og-images (Only allows you to choose from a list of templates)
 - https://github.com/tomaskebrle/astro-og-image (Seems limited)
 - https://github.com/cijiugechu/astro-satori (Possibly dead, hasn't been updated in a year)

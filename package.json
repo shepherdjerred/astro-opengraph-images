@@ -6,6 +6,7 @@
     "prepare": "husky",
     "lint": "eslint src",
     "build": "tsc",
+    "watch": "tsc -w",
     "test": "vitest"
   },
   "main": "dist/index.js",
@@ -47,6 +48,7 @@
   },
   "files": [
     "dist",
+    "src",
     "package.json",
     "README.md",
     "LICENSE",
