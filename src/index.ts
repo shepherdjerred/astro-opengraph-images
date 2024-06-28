@@ -28,7 +28,7 @@ export default function satoriOpenGraph({
 }): AstroIntegration {
   const optionsWithDefaults: Options = { ...defaults, ...options };
   return {
-    name: "astro-satori",
+    name: "astro-opengraph-images",
     hooks: {
       "astro:build:done": async (entry) => {
         try {

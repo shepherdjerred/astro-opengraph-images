@@ -1,5 +1,7 @@
 # Astro OpenGraph Images
 
+[![webring](https://img.shields.io/npm/v/astro-opengraph-images.svg)](https://www.npmjs.com/package/astro-opengraph-images)
+
 This is an [Astro](https://astro.build/) integration that generates images for [OpenGraph](https://ogp.me/) using [Satori](https://github.com/vercel/satori) and [resvg-js](https://github.com/yisibl/resvg-js).
 
 OpenGraph images are the link preview you see when linking a site to Slack, Discord, Twitter, Facebook, etc.
@@ -9,7 +11,7 @@ OpenGraph images are the link preview you see when linking a site to Slack, Disc
 1. Install this package:
 
    ```bash
-   npm i astro-satori
+   npm i astro-opengraph-images
    ```
 
 1. If you want to use React syntax (recommended), install `@types/react`:
