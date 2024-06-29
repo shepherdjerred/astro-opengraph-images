@@ -1,7 +1,7 @@
 import type { APIContext } from "astro";
 import type { ReactNode } from "react";
-import React from "react";
 import { BlogSchema } from "./content/config";
+import React from "react";
 
 export const render = (_context: APIContext): ReactNode => {
   return (

@@ -11,6 +11,9 @@
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "keywords": [
+    "astro-integration"
+  ],
   "dependencies": {
     "@resvg/resvg-js": "^2.6.2",
     "satori": "^0.10.13"
