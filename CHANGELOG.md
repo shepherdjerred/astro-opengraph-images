@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.3.0...v1.3.1) (2024-06-29)
+
+
+### Bug Fixes
+
+* update import ([585b310](https://github.com/shepherdjerred/astro-opengraph-images/commit/585b3100ec97f3634a67d8b8a9694a56380fd388))
+
 ## [1.3.0](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.2.1...v1.3.0) (2024-06-29)
 
 
