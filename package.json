@@ -12,7 +12,11 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "keywords": [
-    "astro-integration"
+    "astro-integration",
+    "withastro",
+    "seo",
+    "ui",
+    "renderer"
   ],
   "dependencies": {
     "@resvg/resvg-js": "^2.6.2",
