@@ -1,4 +1,4 @@
-import { blackAndWhite } from "./blackAndWhite.jsx";
+import { blackAndWhite } from "./blackAndWhite.js";
 
 export const presets = {
   blackAndWhite: blackAndWhite,
