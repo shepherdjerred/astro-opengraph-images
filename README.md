@@ -2,7 +2,7 @@
 
 [![astro-opengraph-images](https://img.shields.io/npm/v/astro-opengraph-images.svg)](https://www.npmjs.com/package/astro-opengraph-images)
 
-Generate OpenGraph images with a few lines of code.
+Generate fully customizable OpenGraph images with a few lines of code.
 
 This is an [Astro](https://astro.build/) integration that generates images for [OpenGraph](https://ogp.me/) using [Satori](https://github.com/vercel/satori) and [resvg-js](https://github.com/yisibl/resvg-js).
 
