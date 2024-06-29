@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.1.0...v1.2.0) (2024-06-29)
+
+
+### Features
+
+* simplify ([d82ab03](https://github.com/shepherdjerred/astro-opengraph-images/commit/d82ab031aa971437a9b02999be52c04a8a9e089c))
+* simplify ([0e1e7c6](https://github.com/shepherdjerred/astro-opengraph-images/commit/0e1e7c6b1d4effa4fb0caa5fcf676168d3b03dd2))
+
+
+### Bug Fixes
+
+* fix json ([0799f5f](https://github.com/shepherdjerred/astro-opengraph-images/commit/0799f5f055d12a3cabd9cc72dd30c9cef9219b84))
+
 ## [1.1.0](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.0.0...v1.1.0) (2024-06-29)
 
 
