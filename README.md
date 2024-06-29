@@ -79,24 +79,24 @@ This project is actively maintained. If you have a feature request or need help,
 
 1. Update your layout to add the appropriate `meta` tags. The [OpenGraph site](https://ogp.me/) has more information about valid tags. At a minimum, you should define the tags below.
 
-The integration will replace `[[OPENGRAPH IMAGE]]` with the path to the image it generated for that page. Note: `site` must be defined in your Astro config.
+   The integration will replace `[[OPENGRAPH IMAGE]]` with the path to the image it generated for that page. Note: `site` must be defined in your Astro config.
 
-The image text comes from your page `<title />` and `<meta name="description" />` tags, so those should be defined.
+   The image text comes from your page `<title />` and `<meta name="description" />` tags, so those should be defined.
 
-```astro
----
-const { url, site } = Astro;
----
+   ```astro
+   ---
+   const { url, site } = Astro;
+   ---
 
-<title>Your page title</title>
+   <title>Your page title</title>
 
-<meta name="description" content="Your page description" />
+   <meta name="description" content="Your page description" />
 
-<meta property="og:title" content="" />
-<meta property="og:type" content="" />
-<meta property="og:url" content={url} />
-<meta property="og:image" content={`${site?.toString()}[[OPENGRAPH IMAGE]]`} />
-```
+   <meta property="og:title" content="" />
+   <meta property="og:type" content="" />
+   <meta property="og:url" content={url} />
+   <meta property="og:image" content={`${site?.toString()}[[OPENGRAPH IMAGE]]`} />
+   ```
 
 1. Confirm that your OpenGraph images are accessible. After you deploy these changes, navigate to [OpenGraph.xyz](https://www.opengraph.xyz/) and test your site.
 
