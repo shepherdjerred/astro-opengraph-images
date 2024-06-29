@@ -46,36 +46,36 @@ This project is actively maintained. If you have a feature request or need help,
 
 1. Configure the integration in your `astro.config.js` file:
 
-```typescript
-// import presets
-import astroOpenGraphImages, { presets } from "astro-opengraph-images";
+   ```typescript
+   // import presets
+   import astroOpenGraphImages, { presets } from "astro-opengraph-images";
 
-// load any fonts you want to use
-// either store these fonts with your project, or use `fetch` to download them when building
-const path = new URL("./public/fonts/CommitMono/CommitMono-700-Regular.otf", import.meta.url);
-const font = fs.readFileSync(path);
+   // load any fonts you want to use
+   // either store these fonts with your project, or use `fetch` to download them when building
+   const path = new URL("./public/fonts/CommitMono/CommitMono-700-Regular.otf", import.meta.url);
+   const font = fs.readFileSync(path);
 
-export default defineConfig({
-  integrations: [
-    opengraphImages({
-      options: {
-        width: 1200,
-        height: 630,
-        fonts: [
-          {
-            data: font,
-            name: "Commit Mono",
-            weight: 400,
-            style: "normal",
-          },
-        ],
-      },
-      // use a preset render function to get started
-      render: presets.blackAndWhite,
-    }),
-  ],
-});
-```
+   export default defineConfig({
+     integrations: [
+       opengraphImages({
+         options: {
+           width: 1200,
+           height: 630,
+           fonts: [
+             {
+               data: font,
+               name: "Commit Mono",
+               weight: 400,
+               style: "normal",
+             },
+           ],
+         },
+         // use a preset render function to get started
+         render: presets.blackAndWhite,
+       }),
+     ],
+   });
+   ```
 
 1. Update your layout to add the appropriate `meta` tags. The [OpenGraph site](https://ogp.me/) has more information about valid tags. At a minimum, you should define the tags below.
 
