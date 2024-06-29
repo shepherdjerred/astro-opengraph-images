@@ -24,25 +24,25 @@ This project is actively maintained. If you have a feature request or need help,
 
 1. Add this integration:
 
-  - Option 1: use the `astro` command:
+   - Option 1: use the `astro` command:
 
-    ```bash
-    npx astro add astro-opengraph-images
-    ```
+     ```bash
+     npx astro add astro-opengraph-images
+     ```
 
-  - Option 2: install the package and add the integration to your `astro.config.js`:
+   - Option 2: install the package and add the integration to your `astro.config.js`:
 
-    ```bash
-    npm i astro-opengraph-images
-    ```
+     ```bash
+     npm i astro-opengraph-images
+     ```
 
-    ```typescript
-    import opengraphImages from "astro-opengraph-images";
+     ```typescript
+     import opengraphImages from "astro-opengraph-images";
 
-    export default defineConfig({
-      integrations: [opengraphImages()],
-    });
-    ```
+     export default defineConfig({
+       integrations: [opengraphImages()],
+     });
+     ```
 
 1. Configure the integration in your `astro.config.js` file:
 
