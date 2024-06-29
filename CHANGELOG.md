@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.2.0...v1.2.1) (2024-06-29)
+
+
+### Bug Fixes
+
+* resolve merge conflict ([ba0c596](https://github.com/shepherdjerred/astro-opengraph-images/commit/ba0c596b3f10a95d0cbe67bf9eef51b552fc7afe))
+
 ## [1.2.0](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.1.0...v1.2.0) (2024-06-29)
 
 
