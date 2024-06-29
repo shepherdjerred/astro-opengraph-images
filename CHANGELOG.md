@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.2.1...v1.3.0) (2024-06-29)
+
+
+### Features
+
+* use React jsx ([b2e8622](https://github.com/shepherdjerred/astro-opengraph-images/commit/b2e862217788735eacebf20396951193dfdb894d))
+
 ## [1.2.1](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.2.0...v1.2.1) (2024-06-29)
 
 
