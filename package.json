@@ -29,18 +29,9 @@
     "@types/jsdom": "^21.1.7",
     "@types/node": "^20.14.9",
     "@types/react": "^18.3.3",
-<<<<<<< HEAD
-    "@typescript-eslint/eslint-plugin": "^7.11.0",
-    "@typescript-eslint/parser": "^7.11.0",
     "astro": "^4.11.3",
-||||||| parent of 5993027 (feat: simplify)
-    "@typescript-eslint/eslint-plugin": "^7.11.0",
-    "@typescript-eslint/parser": "^7.11.0",
-=======
     "@typescript-eslint/eslint-plugin": "^7.14.1",
     "@typescript-eslint/parser": "^7.14.1",
-    "astro": "^4.11.3",
->>>>>>> 5993027 (feat: simplify)
     "eslint": "^8.57.0",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.7",
