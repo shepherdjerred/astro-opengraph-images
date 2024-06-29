@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.0.0...v1.1.0) (2024-06-29)
+
+
+### Features
+
+* simplify setup ([08a922e](https://github.com/shepherdjerred/astro-opengraph-images/commit/08a922e7d096930e3af40865d34ac18c480384fa))
+
 ## 1.0.0 (2024-06-28)
 
 
