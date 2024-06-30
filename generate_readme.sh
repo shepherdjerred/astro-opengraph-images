@@ -1,5 +1,9 @@
 #!/bin/bash
 
+set -euxo pipefail
+
+npx tsx src/presets/renderExamples.ts
+
 # look up the files in assets/presets/
 # save the list as JSON
 export presets=$(ls assets/presets/ | jq -R . | jq -s .)

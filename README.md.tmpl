@@ -7,7 +7,7 @@
 
 [![astro-opengraph-images](https://img.shields.io/npm/v/astro-opengraph-images.svg)](https://www.npmjs.com/package/astro-opengraph-images)
 
-Generate fully customizable Open Graph images for your entire Astro site with just a few lines of code.
+Generate Open Graph images for your Astro site.
 
 This project is actively maintained. If you have a feature request or need help, please [create an issue](https://github.com/shepherdjerred/astro-opengraph-images/issues/new).
 
@@ -15,24 +15,25 @@ This project is actively maintained. If you have a feature request or need help,
 
 ## What is Open Graph?
 
-[Open Graph](https://ogp.me/) is a protocol created by Facebook. It allows your site to be richly embedded into other sites and applications.
+[Open Graph](https://ogp.me/) is a protocol created by Facebook. It allows pages on your site to be richly embedded into other sites and applications.
 
 You've probably seen this in action when posting a link on Facebook, Twitter, Slack, iMessage, or Discord. Links posted in supported applications will display the Open Graph metadata which often includes an image. This library will generate those images for you.
 
 ## Features
 
+> [!WARNING]
+> This integration has only been tested with statically rendered sites. It is untested with server-side rendering.
+
 - Generate Open Graph images for every page on your site.
 - Use a preset renderer to get started quickly.
+- Images are fully customizable.
 - Use React + Tailwind syntax or vanilla JavaScript to define your own custom images.
 - Supports both static pages and Astro content collections.
 - Pages can be written in Markdown, MDX, HTML, or any other format.
 
-> [!WARNING]
-> This integration has only been tested with statically rendered sites. It is untested with server-side rendering.
-
 ## Quick Start
 
-1. Add this integration:
+1. Add this integration to your `astro.config.js`:
 
    - Option 1: use the `astro` command:
 
@@ -56,21 +57,20 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
      });
      ```
 
-1. Install the fonts you want to use.
+1. Install the fonts you want to use. Fonts must be explicitly declared to be used for images. For this quick start guide, we'll install the [roboto](https://fontsource.org/fonts/roboto) font.
 
-   - Option 1: Install the fonts through [fontsource](https://fontsource.org/) with npm.
-   - Option 2: Use the `fetch` API to download the fonts when building your site.
-   - Option 3: Store the fonts with your project.
+    ```bash
+    npm i @fontsource/roboto
+    ```
 
 1. Configure the integration in your `astro.config.js` file:
 
    ```typescript
-   // import presets
-   import astroOpenGraphImages, { presets } from "astro-opengraph-images";
+   import opengraphImages, { presets } from "astro-opengraph-images";
 
    export default defineConfig({
      integrations: [
-       astroOpenGraphImages({
+       opengraphImages({
          options: {
            width: 1200,
            height: 630,
@@ -95,17 +95,36 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
 
    ```diff
    ---
+   interface Props {
+     title: string;
+   }
+
+   const { title } = Astro.props;
    +const { url, site } = Astro;
    ---
 
-   +<title>Your page title</title>
+  <!doctype html>
+   <html lang="en">
+     <head>
+       <meta charset="UTF-8" />
+       <meta name="description" content="Astro description" />
+       <meta name="viewport" content="width=device-width" />
+       <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+       <meta name="generator" content={Astro.generator} />
+       <title>{title}</title>
 
-   +<meta name="description" content="Your page description" />
+       +<meta name="description" content="Your page description" />
 
-   +<meta property="og:title" content="" />
-   +<meta property="og:type" content="" />
-   +<meta property="og:url" content={url} />
-   +<meta property="og:image" content={`${site?.toString()}[[OPENGRAPH IMAGE]]`} />
+       +<meta property="og:title" content="{title}" />
+       <!-- Add the correct type from https://ogp.me/#types -->
+       +<meta property="og:type" content="website" />
+       +<meta property="og:url" content={url} />
+       +<meta property="og:image" content={`${site?.toString()}[[OPENGRAPH IMAGE]]`} />
+     </head>
+     <body>
+       <slot />
+     </body>
+   </html>
    ```
 
 1. Confirm that your OpenGraph images are accessible. After you deploy these changes, navigate to [OpenGraph.xyz](https://www.opengraph.xyz/) and test your site.

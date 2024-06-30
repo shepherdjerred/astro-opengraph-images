@@ -1,7 +1,7 @@
 import { Resvg } from "@resvg/resvg-js";
 import satori, { type SatoriOptions } from "satori";
 import { presets } from "./index.js";
-import * as fs from "fs";
+import * as fs from "fs/promises";
 
 // Updates the examples for the README
 // Run with `npx tsx src/presets/renderExamples.ts`
@@ -20,13 +20,12 @@ async function renderExamples() {
         name: "Roboto",
         weight: 400,
         style: "normal",
-        data: fs.readFileSync("node_modules/@fontsource/roboto/files/roboto-latin-400-normal.woff"),
+        data: await fs.readFile("node_modules/@fontsource/roboto/files/roboto-latin-400-normal.woff"),
       },
     ],
   };
 
-  // for each preset, render the page and save the file
-  for (const [name, preset] of Object.entries(presets)) {
+  const promises = Object.entries(presets).map(async ([name, preset]) => {
     const svg = await satori(preset(page), options);
     const resvg = new Resvg(svg, {
       fitTo: {
@@ -35,8 +34,11 @@ async function renderExamples() {
       },
     });
     const target = `assets/presets/${name}.png`;
-    fs.writeFileSync(target, resvg.render().asPng());
-  }
+    await fs.writeFile(target, resvg.render().asPng());
+    console.log(`Wrote ${target}`);
+  });
+
+  await Promise.all(promises);
 }
 
 await renderExamples();
