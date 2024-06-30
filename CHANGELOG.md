@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.4.1](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.4.0...v1.4.1) (2024-06-30)
+
+
+### Bug Fixes
+
+* correct image ([de0a076](https://github.com/shepherdjerred/astro-opengraph-images/commit/de0a07680b2e31fbd3ee2ca615c927e5c1823f49))
+* don't require width and height ([1793584](https://github.com/shepherdjerred/astro-opengraph-images/commit/17935846ec2b29fe45e1612a5bb76de0fecdbc56))
+* use correct image ([d0398fa](https://github.com/shepherdjerred/astro-opengraph-images/commit/d0398fa9c4639374df608901f8ff8c5e47c26b49))
+
 ## [1.4.0](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.3.1...v1.4.0) (2024-06-30)
 
 
