@@ -42,6 +42,9 @@ async function handlePage({ page, options, render, dir, logger }: HandlePageInpu
 
   const svg = await satori(render({ ...page, ...data }), options);
   const resvg = new Resvg(svg, {
+    font: {
+      loadSystemFonts: false,
+    },
     fitTo: {
       mode: "width",
       value: options.width,

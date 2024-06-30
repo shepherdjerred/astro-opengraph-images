@@ -28,6 +28,9 @@ async function renderExamples() {
   const promises = Object.entries(presets).map(async ([name, preset]) => {
     const svg = await satori(preset(page), options);
     const resvg = new Resvg(svg, {
+      font: {
+        loadSystemFonts: false,
+      },
       fitTo: {
         mode: "width",
         value: options.width,

@@ -7,8 +7,6 @@ export default defineConfig({
   integrations: [
     opengraphImages({
       options: {
-        width: 1200,
-        height: 630,
         fonts: [
           {
             name: "Roboto",

@@ -2,6 +2,8 @@
 
 set -euxo pipefail
 
+rm -rf assets/presets/*
+
 npx tsx src/presets/renderExamples.ts
 
 # look up the files in assets/presets/

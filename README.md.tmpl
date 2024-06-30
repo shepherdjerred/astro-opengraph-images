@@ -91,9 +91,11 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
    });
    ```
 
-1. Update your layout to add the appropriate `meta` tags. The [OpenGraph site](https://ogp.me/) has more information about valid tags. At a minimum, you should define the tags below.
+1. Update your layout to add the appropriate `meta` tags. The [OpenGraph site](https://ogp.me/) has more information about valid tags.
 
    The integration will replace `[[OPENGRAPH IMAGE]]` with the path to the image it generated for that page. Note: `site` must be defined in your Astro config.
+
+   At a minimum, you should define the tags below.
 
    ```diff
    ---
