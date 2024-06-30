@@ -114,45 +114,12 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
 
 Presets are located in [`src/presets/`](https://github.com/shepherdjerred/astro-opengraph-images/tree/main/src/presets). [Open a pull request](https://github.com/shepherdjerred/astro-opengraph-images/compare) to contribute a preset you've created.
 
-### backgroundImage
+{{ range $preset := (ds "presets") -}}
+### {{ strings.ReplaceAll ".png" "" $preset }}
 
-![](assets/presets/backgroundImage.png)
+![](assets/presets/{{ $preset }})
 
-### blackAndWhite
-
-![](assets/presets/blackAndWhite.png)
-
-### brandedLogo
-
-![](assets/presets/brandedLogo.png)
-
-### gradients
-
-![](assets/presets/gradients.png)
-
-### podcast
-
-![](assets/presets/podcast.png)
-
-### rauchg
-
-![](assets/presets/rauchg.png)
-
-### simpleBlog
-
-![](assets/presets/simpleBlog.png)
-
-### tailwind
-
-![](assets/presets/tailwind.png)
-
-### vercel
-
-![](assets/presets/vercel.png)
-
-### waveSvg
-
-![](assets/presets/waveSvg.png)
+{{ end }}
 
 ## Custom Renderers
 
