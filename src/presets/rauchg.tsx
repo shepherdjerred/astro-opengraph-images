@@ -1,7 +1,7 @@
 import React from "react";
 import type { RenderFunctionInput } from "../types.js";
 
-export function rauchg({ title, description }: RenderFunctionInput): React.ReactNode {
+export function rauchg({ title }: RenderFunctionInput): React.ReactNode {
   return (
     <div
       style={{
@@ -58,7 +58,6 @@ export function rauchg({ title, description }: RenderFunctionInput): React.React
       >
         {title}
       </div>
-      <p>{description ?? ""}</p>
     </div>
   );
 }

@@ -12,8 +12,6 @@ async function renderExamples() {
     pathname: "empty",
   };
 
-  const font = fs.readFileSync("assets/fonts/Roboto/Roboto-Regular.ttf");
-
   const options: SatoriOptions = {
     width: 1200,
     height: 630,
@@ -22,7 +20,7 @@ async function renderExamples() {
         name: "Roboto",
         weight: 400,
         style: "normal",
-        data: font,
+        data: fs.readFileSync("node_modules/@fontsource/roboto/files/roboto-latin-400-normal.woff"),
       },
     ],
   };

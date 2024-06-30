@@ -12,26 +12,6 @@ export function tailwind({ title, description }: RenderFunctionInput): React.Rea
             <span>{title}</span>
             <span style={twj("text-indigo-600")}>{description}</span>
           </h2>
-          <div style={twj("mt-8 flex md:mt-0")}>
-            <div style={twj("flex rounded-md shadow")}>
-              <a
-                style={twj(
-                  "flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-5 py-3 text-base font-medium text-white",
-                )}
-              >
-                Get started
-              </a>
-            </div>
-            <div style={twj("ml-3 flex rounded-md shadow")}>
-              <a
-                style={twj(
-                  "flex items-center justify-center rounded-md border border-transparent bg-white px-5 py-3 text-base font-medium text-indigo-600",
-                )}
-              >
-                Learn more
-              </a>
-            </div>
-          </div>
         </div>
       </div>
     </div>

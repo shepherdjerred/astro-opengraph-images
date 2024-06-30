@@ -44,16 +44,17 @@ This project is actively maintained. If you have a feature request or need help,
      });
      ```
 
+1. Install the fonts you want to use.
+
+   - Option 1: Install the fonts through [fontsource](https://fontsource.org/) with npm.
+   - Option 2: Use the `fetch` API to download the fonts when building your site.
+   - Option 3: Store the fonts with your project.
+
 1. Configure the integration in your `astro.config.js` file:
 
    ```typescript
    // import presets
    import astroOpenGraphImages, { presets } from "astro-opengraph-images";
-
-   // load any fonts you want to use
-   // either store these fonts with your project, or use `fetch` to download them when building
-   const path = new URL("./public/fonts/CommitMono/CommitMono-700-Regular.otf", import.meta.url);
-   const font = fs.readFileSync(path);
 
    export default defineConfig({
      integrations: [
@@ -63,14 +64,13 @@ This project is actively maintained. If you have a feature request or need help,
            height: 630,
            fonts: [
              {
-               data: font,
-               name: "Commit Mono",
+               name: "Roboto",
                weight: 400,
                style: "normal",
+               data: fs.readFileSync("node_modules/@fontsource/roboto/files/roboto-latin-400-normal.woff"),
              },
            ],
          },
-         // use a preset render function to get started
          render: presets.blackAndWhite,
        }),
      ],
@@ -80,8 +80,6 @@ This project is actively maintained. If you have a feature request or need help,
 1. Update your layout to add the appropriate `meta` tags. The [OpenGraph site](https://ogp.me/) has more information about valid tags. At a minimum, you should define the tags below.
 
    The integration will replace `[[OPENGRAPH IMAGE]]` with the path to the image it generated for that page. Note: `site` must be defined in your Astro config.
-
-   The image text comes from your page `<title />` and `<meta name="description" />` tags, so those should be defined.
 
    ```astro
    ---
@@ -106,19 +104,35 @@ Presets are located in [`src/presets/`](https://github.com/shepherdjerred/astro-
 
 Here are the current presets:
 
+### Background Image
+
+![The background image preset](./assets/presets/backgroundImage.png)
+
 ### Black and White
 
 This is what I use for my personal blog. It's a good starting point for creating your own custom images.
 
 ![The black and white preset](./assets/presets/blackAndWhite.png)
 
+### Branded Logo
+
+![The branded logo preset](./assets/presets/brandedLogo.png)
+
 ### Gradients
 
 ![The gradient preset](./assets/presets/gradients.png)
 
+### Podcast
+
+![The podcast preset](./assets/presets/podcast.png)
+
 ### rauchg
 
 ![The rauchg preset](./assets/presets/rauchg.png)
+
+### Simple Blog
+
+![The simple blog preset](./assets/presets/simpleBlog.png)
 
 ### Tailwind
 
@@ -127,6 +141,10 @@ This is what I use for my personal blog. It's a good starting point for creating
 ### Vercel
 
 ![The vercel preset](./assets/presets/vercel.png)
+
+### Wave SVG
+
+![The wave SVG preset](./assets/presets/waveSvg.png)
 
 ## Custom Renderers
 

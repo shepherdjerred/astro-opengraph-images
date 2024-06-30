@@ -1,7 +1,7 @@
 import React from "react";
 import type { RenderFunctionInput } from "../types.js";
 
-export function vercel({ title, description }: RenderFunctionInput): React.ReactNode {
+export function vercel({ title }: RenderFunctionInput): React.ReactNode {
   return (
     <div
       style={{
@@ -43,7 +43,6 @@ export function vercel({ title, description }: RenderFunctionInput): React.React
       >
         <b>{title}</b>
       </div>
-      <p>{description ?? ""}</p>
     </div>
   );
 }
