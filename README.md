@@ -13,7 +13,7 @@ This project is actively maintained. If you have a feature request or need help,
 
 - Generate OpenGraph images for every page on your site.
 - Use a preset renderer to get started quickly.
-- Use React syntax or vanilla JavaScript to define your own custom images.
+- Use React + Tailwind syntax or vanilla JavaScript to define your own custom images.
 - Supports both static pages and Astro content collections.
 - Pages can be written in Markdown, MDX, HTML, or any other format.
 
@@ -112,6 +112,22 @@ This is what I use for my personal blog. It's a good starting point for creating
 
 ![The black and white preset](./assets/presets/blackAndWhite.png)
 
+### Gradients
+
+![The gradient preset](./assets/presets/gradients.png)
+
+### rauchg
+
+![The rauchg preset](./presets/rauchg.png)
+
+### Tailwind
+
+![The tailwind preset](./presets/tailwind.png)
+
+### Vercel
+
+![The vercel preset](./presets/vercel.png)
+
 ## Custom Renderers
 
 You can create your own custom images with a render function. Take a look at how [a preset](https://github.com/shepherdjerred/astro-opengraph-images/blob/main/src/presets/blackAndWhite.tsx) works.
@@ -122,6 +138,8 @@ This library uses [Satori](https://github.com/vercel/satori) to convert React co
 > Satori supports [a subset of CSS](https://github.com/vercel/satori?tab=readme-ov-file#css). Be sure to familiarize yourself with its limitations.
 >
 > You can use the [Satori playground](https://og-playground.vercel.app/) to work on your images.
+>
+> You can use Tailwind syntax with [tw-to-css](https://github.com/vinicoder/tw-to-css). You'll need to install this package yourself.
 
 ## Alternatives
 
