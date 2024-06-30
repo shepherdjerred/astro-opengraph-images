@@ -65,26 +65,26 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
 
 1. Configure the integration in your `astro.config.js` file:
 
-   ```typescript
-   import opengraphImages, { presets } from "astro-opengraph-images";
+   ```diff
+   -import opengraphImages from "astro-opengraph-images";
+   +import opengraphImages, { presets } from "astro-opengraph-images";
 
    export default defineConfig({
      integrations: [
-       opengraphImages({
-         options: {
-           width: 1200,
-           height: 630,
-           fonts: [
-             {
-               name: "Roboto",
-               weight: 400,
-               style: "normal",
-               data: fs.readFileSync("node_modules/@fontsource/roboto/files/roboto-latin-400-normal.woff"),
-             },
-           ],
-         },
-         render: presets.blackAndWhite,
-       }),
+   -    opengraphImages()
+   +    opengraphImages({
+   +      options: {
+   +        fonts: [
+   +          {
+   +            name: "Roboto",
+   +            weight: 400,
+   +            style: "normal",
+   +            data: fs.readFileSync("node_modules/@fontsource/roboto/files/roboto-latin-400-normal.woff"),
+   +          },
+   +        ],
+   +      },
+   +      render: presets.blackAndWhite,
+   +    }),
      ],
    });
    ```
@@ -102,9 +102,8 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
    const { title } = Astro.props;
    +const { url, site } = Astro;
    ---
-   ```
 
-  <!doctype html>
+   <!doctype html>
    <html lang="en">
      <head>
        <meta charset="UTF-8" />
@@ -125,7 +124,6 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
      <body>
        <slot />
      </body>
-
    </html>
    ```
 
