@@ -113,13 +113,13 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
        <meta name="generator" content={Astro.generator} />
        <title>{title}</title>
 
-       +<meta name="description" content="Your page description" />
+   +    <meta name="description" content="Your page description" />
 
-       +<meta property="og:title" content="{title}" />
-       <!-- Add the correct type from https://ogp.me/#types -->
-       +<meta property="og:type" content="website" />
-       +<meta property="og:url" content={url} />
-       +<meta property="og:image" content={`${site?.toString()}[[OPENGRAPH IMAGE]]`} />
+   +    <meta property="og:title" content="{title}" />
+   +    <!-- Add the correct type from https://ogp.me/#types -->
+   +    <meta property="og:type" content="website" />
+   +    <meta property="og:url" content={url} />
+   +    <meta property="og:image" content={`${site?.toString()}[[OPENGRAPH IMAGE]]`} />
      </head>
      <body>
        <slot />
