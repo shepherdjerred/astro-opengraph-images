@@ -118,15 +118,15 @@ This is what I use for my personal blog. It's a good starting point for creating
 
 ### rauchg
 
-![The rauchg preset](./presets/rauchg.png)
+![The rauchg preset](./assets/presets/rauchg.png)
 
 ### Tailwind
 
-![The tailwind preset](./presets/tailwind.png)
+![The tailwind preset](./assets/presets/tailwind.png)
 
 ### Vercel
 
-![The vercel preset](./presets/vercel.png)
+![The vercel preset](./assets/presets/vercel.png)
 
 ## Custom Renderers
 
@@ -139,7 +139,7 @@ This library uses [Satori](https://github.com/vercel/satori) to convert React co
 >
 > You can use the [Satori playground](https://og-playground.vercel.app/) to work on your images.
 >
-> You can use Tailwind syntax with [tw-to-css](https://github.com/vinicoder/tw-to-css). You'll need to install this package yourself.
+> You can use Tailwind syntax with [tw-to-css](https://github.com/vinicoder/tw-to-css). An example is the [Tailwind preset](https://github.com/shepherdjerred/astro-opengraph-images/blob/main/src/presets/tailwind.tsx). You'll need to install this package yourself.
 
 ## Alternatives
 
