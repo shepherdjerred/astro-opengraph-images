@@ -6,7 +6,7 @@ export interface IntegrationInput {
   render: RenderFunction;
 }
 
-export type DefaultIntegrationOptions = SatoriOptions & {
+export type DefaultIntegrationOptions = Omit<Omit<SatoriOptions, "width">, "height"> & {
   width?: number;
   height?: number;
 };

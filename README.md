@@ -57,7 +57,9 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
      });
      ```
 
-1. Install the fonts you want to use. Fonts must be explicitly declared to be used for images. For this quick start guide, we'll install the [roboto](https://fontsource.org/fonts/roboto) font.
+1. Install the fonts you want to use. Fonts must be explicitly declared to be used for images. System fonts are _not_ available. For this quick start guide, we'll install the [Roboto](https://fontsource.org/fonts/roboto) font.
+
+   You can find more fonts on [Fontsource](https://fontsource.org/), or you can use any font file.
 
    ```bash
    npm i @fontsource/roboto
