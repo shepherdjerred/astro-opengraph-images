@@ -7,8 +7,8 @@ import * as fs from "fs";
 // Run with `npx tsx src/presets/renderExamples.ts`
 async function renderExamples() {
   const page = {
-    title: "Hello, world!",
-    description: "This is a description",
+    title: "3D Graphics with OpenGL",
+    description: "An introduction to 3D graphics rendering and OpenGL.",
     pathname: "empty",
   };
 
