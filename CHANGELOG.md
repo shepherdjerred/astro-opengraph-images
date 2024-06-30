@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.3.1...v1.4.0) (2024-06-30)
+
+
+### Features
+
+* add new presets ([8a54687](https://github.com/shepherdjerred/astro-opengraph-images/commit/8a5468741998557dc740ffd5b053787ccfb567b8))
+
 ## [1.3.1](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.3.0...v1.3.1) (2024-06-29)
 
 
