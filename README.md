@@ -170,6 +170,19 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
    - Sending a link to your site in an application that supports Open Graph like iMessage, Slack, Discord, etc.
    - Visit [opengraph.xyz](http://opengraph.xyz/) and test your site.
 
+## Custom Renderers
+
+You can create your own custom images with a render function. Take a look at how [a preset](https://github.com/shepherdjerred/astro-opengraph-images/blob/main/src/presets/blackAndWhite.tsx) works.
+
+This library uses [Satori](https://github.com/vercel/satori) to convert React components to SVG. The SVG is then converted to a PNG using [resvg-js](https://github.com/yisibl/resvg-js).
+
+> [!TIP]
+> Satori supports [a subset of CSS](https://github.com/vercel/satori?tab=readme-ov-file#css). Be sure to familiarize yourself with its limitations.
+>
+> You can use the [Satori playground](https://og-playground.vercel.app/) to work on your images.
+>
+> You can use Tailwind syntax with [tw-to-css](https://github.com/vinicoder/tw-to-css). An example is the [Tailwind preset](https://github.com/shepherdjerred/astro-opengraph-images/blob/main/src/presets/tailwind.tsx). You'll need to install this package yourself.
+
 ## Presets
 
 Presets are located in [`src/presets/`](https://github.com/shepherdjerred/astro-opengraph-images/tree/main/src/presets). [Open a pull request](https://github.com/shepherdjerred/astro-opengraph-images/compare) to contribute a preset you've created.
@@ -187,7 +200,8 @@ import opengraphImages, { presets } from "astro-opengraph-images";
 
 opengraphImages({
   options: {
-  render: presets.backgroundImage,
+    render: presets.backgroundImage,
+  }
 }),
 ```
 
@@ -200,7 +214,8 @@ import opengraphImages, { presets } from "astro-opengraph-images";
 
 opengraphImages({
   options: {
-  render: presets.blackAndWhite,
+    render: presets.blackAndWhite,
+  }
 }),
 ```
 
@@ -213,7 +228,8 @@ import opengraphImages, { presets } from "astro-opengraph-images";
 
 opengraphImages({
   options: {
-  render: presets.brandedLogo,
+    render: presets.brandedLogo,
+  }
 }),
 ```
 
@@ -226,7 +242,8 @@ import opengraphImages, { presets } from "astro-opengraph-images";
 
 opengraphImages({
   options: {
-  render: presets.gradients,
+    render: presets.gradients,
+  }
 }),
 ```
 
@@ -239,7 +256,8 @@ import opengraphImages, { presets } from "astro-opengraph-images";
 
 opengraphImages({
   options: {
-  render: presets.podcast,
+    render: presets.podcast,
+  }
 }),
 ```
 
@@ -252,7 +270,8 @@ import opengraphImages, { presets } from "astro-opengraph-images";
 
 opengraphImages({
   options: {
-  render: presets.rauchg,
+    render: presets.rauchg,
+  }
 }),
 ```
 
@@ -265,7 +284,8 @@ import opengraphImages, { presets } from "astro-opengraph-images";
 
 opengraphImages({
   options: {
-  render: presets.simpleBlog,
+    render: presets.simpleBlog,
+  }
 }),
 ```
 
@@ -278,7 +298,8 @@ import opengraphImages, { presets } from "astro-opengraph-images";
 
 opengraphImages({
   options: {
-  render: presets.tailwind,
+    render: presets.tailwind,
+  }
 }),
 ```
 
@@ -291,7 +312,8 @@ import opengraphImages, { presets } from "astro-opengraph-images";
 
 opengraphImages({
   options: {
-  render: presets.vercel,
+    render: presets.vercel,
+  }
 }),
 ```
 
@@ -304,24 +326,12 @@ import opengraphImages, { presets } from "astro-opengraph-images";
 
 opengraphImages({
   options: {
-  render: presets.waveSvg,
+    render: presets.waveSvg,
+  }
 }),
 ```
 
 ![](assets/presets/waveSvg.png)
-
-## Custom Renderers
-
-You can create your own custom images with a render function. Take a look at how [a preset](https://github.com/shepherdjerred/astro-opengraph-images/blob/main/src/presets/blackAndWhite.tsx) works.
-
-This library uses [Satori](https://github.com/vercel/satori) to convert React components to SVG. The SVG is then converted to a PNG using [resvg-js](https://github.com/yisibl/resvg-js).
-
-> [!TIP]
-> Satori supports [a subset of CSS](https://github.com/vercel/satori?tab=readme-ov-file#css). Be sure to familiarize yourself with its limitations.
->
-> You can use the [Satori playground](https://og-playground.vercel.app/) to work on your images.
->
-> You can use Tailwind syntax with [tw-to-css](https://github.com/vinicoder/tw-to-css). An example is the [Tailwind preset](https://github.com/shepherdjerred/astro-opengraph-images/blob/main/src/presets/tailwind.tsx). You'll need to install this package yourself.
 
 ## Alternatives
 
