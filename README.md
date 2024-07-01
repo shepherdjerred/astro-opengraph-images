@@ -106,7 +106,7 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
    - `og:description`
      - Optional. This field may be used when generating images.
 
-   Your site will fail to build if the tags above are not set. Additionally, if the value of `og:image` does not match what this integration expects, the site will fail to build. This is to ensure your site is correctly configured to display
+   Your site will fail to build if the tags above are not set. Additionally, if the value of `og:image` does not match what this integration expects, the site will fail to build. This is to ensure your site is correctly configured to display Open Graph images.
 
    Make sure the [`site`](https://docs.astro.build/en/reference/configuration-reference/#site) property is configured in your Astro config. This integration will not work without it.
 
@@ -167,10 +167,8 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
 
 1. Deploy your site. You can verify that your images are correct by:
 
-- Sending a link to your site in an application that supports Open Graph like iMessage, Slack, Discord, etc.
-- Visit [opengraph.xyz](http://opengraph.xyz/) and test your site.
-
-these changes, navigate to [OpenGraph.xyz](https://www.opengraph.xyz/) and test your site.
+   - Sending a link to your site in an application that supports Open Graph like iMessage, Slack, Discord, etc.
+   - Visit [opengraph.xyz](http://opengraph.xyz/) and test your site.
 
 ## Presets
 
@@ -182,7 +180,7 @@ Note: some presets use the [`tw-to-css`](https://github.com/vinicoder/tw-to-css)
 npm i tw-to-css
 ```
 
-### backgroundImage
+### `backgroundImage`
 
 ```typescript
 import opengraphImages, { presets } from "astro-opengraph-images";
@@ -195,7 +193,7 @@ opengraphImages({
 
 ![](assets/presets/backgroundImage.png)
 
-### blackAndWhite
+### `blackAndWhite`
 
 ```typescript
 import opengraphImages, { presets } from "astro-opengraph-images";
@@ -208,7 +206,7 @@ opengraphImages({
 
 ![](assets/presets/blackAndWhite.png)
 
-### brandedLogo
+### `brandedLogo`
 
 ```typescript
 import opengraphImages, { presets } from "astro-opengraph-images";
@@ -221,7 +219,7 @@ opengraphImages({
 
 ![](assets/presets/brandedLogo.png)
 
-### gradients
+### `gradients`
 
 ```typescript
 import opengraphImages, { presets } from "astro-opengraph-images";
@@ -234,7 +232,7 @@ opengraphImages({
 
 ![](assets/presets/gradients.png)
 
-### podcast
+### `podcast`
 
 ```typescript
 import opengraphImages, { presets } from "astro-opengraph-images";
@@ -247,7 +245,7 @@ opengraphImages({
 
 ![](assets/presets/podcast.png)
 
-### rauchg
+### `rauchg`
 
 ```typescript
 import opengraphImages, { presets } from "astro-opengraph-images";
@@ -260,7 +258,7 @@ opengraphImages({
 
 ![](assets/presets/rauchg.png)
 
-### simpleBlog
+### `simpleBlog`
 
 ```typescript
 import opengraphImages, { presets } from "astro-opengraph-images";
@@ -273,7 +271,7 @@ opengraphImages({
 
 ![](assets/presets/simpleBlog.png)
 
-### tailwind
+### `tailwind`
 
 ```typescript
 import opengraphImages, { presets } from "astro-opengraph-images";
@@ -286,7 +284,7 @@ opengraphImages({
 
 ![](assets/presets/tailwind.png)
 
-### vercel
+### `vercel`
 
 ```typescript
 import opengraphImages, { presets } from "astro-opengraph-images";
@@ -299,7 +297,7 @@ opengraphImages({
 
 ![](assets/presets/vercel.png)
 
-### waveSvg
+### `waveSvg`
 
 ```typescript
 import opengraphImages, { presets } from "astro-opengraph-images";
