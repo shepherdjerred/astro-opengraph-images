@@ -1,3 +1,4 @@
+import type { RenderFunction } from "../types.js";
 import { backgroundImage } from "./backgroundImage.js";
 import { blackAndWhite } from "./blackAndWhite.js";
 import { brandedLogo } from "./brandedLogo.js";
@@ -9,7 +10,7 @@ import { tailwind } from "./tailwind.js";
 import { vercel } from "./vercel.js";
 import { waveSvg } from "./waveSvg.js";
 
-export const presets = {
+export const presets: Record<string, RenderFunction> = {
   blackAndWhite,
   gradients,
   rauchg,

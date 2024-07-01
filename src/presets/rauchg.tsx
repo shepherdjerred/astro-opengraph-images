@@ -1,8 +1,8 @@
 import React from "react";
 import type { RenderFunctionInput } from "../types.js";
 
-export function rauchg({ title }: RenderFunctionInput): React.ReactNode {
-  return (
+export function rauchg({ title }: RenderFunctionInput): Promise<React.ReactNode> {
+  return Promise.resolve(
     <div
       style={{
         display: "flex",
@@ -58,6 +58,6 @@ export function rauchg({ title }: RenderFunctionInput): React.ReactNode {
       >
         {title}
       </div>
-    </div>
+    </div>,
   );
 }

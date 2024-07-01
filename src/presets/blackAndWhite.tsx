@@ -1,8 +1,8 @@
 import React from "react";
 import type { RenderFunctionInput } from "../types.js";
 
-export function blackAndWhite({ title, description }: RenderFunctionInput): React.ReactNode {
-  return (
+export function blackAndWhite({ title, description }: RenderFunctionInput): Promise<React.ReactNode> {
+  return Promise.resolve(
     <div
       style={{
         height: "100%",
@@ -30,6 +30,6 @@ export function blackAndWhite({ title, description }: RenderFunctionInput): Reac
       >
         {description ?? ""}
       </div>
-    </div>
+    </div>,
   );
 }

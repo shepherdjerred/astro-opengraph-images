@@ -1,8 +1,8 @@
 import React from "react";
 import type { RenderFunctionInput } from "../types.js";
 
-export function gradients({ title, description }: RenderFunctionInput): React.ReactNode {
-  return (
+export function gradients({ title, description }: RenderFunctionInput): Promise<React.ReactNode> {
+  return Promise.resolve(
     <div
       style={{
         display: "flex",
@@ -36,6 +36,6 @@ export function gradients({ title, description }: RenderFunctionInput): React.Re
       >
         {description ?? ""}
       </div>
-    </div>
+    </div>,
   );
 }
