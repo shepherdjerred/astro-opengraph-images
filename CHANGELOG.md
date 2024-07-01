@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.5.0](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.4.1...v1.5.0) (2024-07-01)
+
+
+### Features
+
+* simplify ([6236085](https://github.com/shepherdjerred/astro-opengraph-images/commit/6236085749e19cc93d1df06c494a18e78a9c2b27))
+
+
+### Bug Fixes
+
+* correctly determine paths ([adc97a2](https://github.com/shepherdjerred/astro-opengraph-images/commit/adc97a2638b6a9593eea7f61939a8931f6249c08))
+* **deps:** update dependency astro-opengraph-images to v1.4.1 ([9aaeeb1](https://github.com/shepherdjerred/astro-opengraph-images/commit/9aaeeb1d4226d89eac726053fe18edd7de4955f0))
+* require at least one font to be defined ([58eae4c](https://github.com/shepherdjerred/astro-opengraph-images/commit/58eae4ccc400d201e4b6b8c100f9884cc64d7927))
+
 ## [1.4.1](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.4.0...v1.4.1) (2024-06-30)
 
 ### Bug Fixes
