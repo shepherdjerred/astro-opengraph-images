@@ -115,20 +115,20 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
        <meta name="generator" content={Astro.generator} />
        <title>{title}</title>
 
-  +     <SEO
-  +       openGraph={{
-  +         basic: {
-  +           title: title,
-  +           // Add the correct type from https://ogp.me/#types
-  +           type: "website",
-  +           image: TODO: add some function to determine the URL at build time,
-  +           url: url,
-  +         },
-  +         optional: {
-  +           description: "My page description",
-  +         },
-  +       }}
-  +     />
+   +     <SEO
+   +       openGraph={{
+   +         basic: {
+   +           title: title,
+   +           // Add the correct type from https://ogp.me/#types
+   +           type: "website",
+   +           image: TODO: add some function to determine the URL at build time,
+   +           url: url,
+   +         },
+   +         optional: {
+   +           description: "My page description",
+   +         },
+   +       }}
+   +     />
      </head>
      <body>
        <slot />
