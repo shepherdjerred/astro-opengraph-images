@@ -57,13 +57,15 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
      });
      ```
 
-1. Install the fonts you want to use. Fonts must be explicitly declared to be used for images. System fonts are _not_ available. For this quick start guide, we'll install the [Roboto](https://fontsource.org/fonts/roboto) font.
+1. Install the fonts you want to use. Fonts must be explicitly declared to be used for images. System fonts are _not_ available. For this quick start guide, we'll install the [Roboto](https://fontsource.org/fonts/roboto) font:
 
    ```bash
    npm i @fontsource/roboto
    ```
 
    You can find more fonts on [Fontsource](https://fontsource.org/), or you can use any font file.
+
+   See [Satori's font documentation](https://github.com/vercel/satori?tab=readme-ov-file#fonts) for more information.
 
 1. Configure the integration in your `astro.config.js` file:
 
@@ -96,15 +98,15 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
    The following `meta` tags must be defined:
 
    - `og:title`
-     - Optional. This field may be used when generating images.
+     - This field may be used when generating images.
    - `og:type`
      - See the [Open Graph documentation](https://ogp.me/#types) for valid values.
    - `og:image`
-     - Use the `getImagePath` function to set this (example shown below).
+     - Set this to the return value of `getImagePath` (example shown below).
    - `og:description`
      - Optional. This field may be used when generating images.
 
-   If the above fields are not set, then the your site will fail to build. Additionally, if the value of `og:image` does not match what this integration expects, the site will fail to build.
+   Your site will fail to build if the tags above are not set. Additionally, if the value of `og:image` does not match what this integration expects, the site will fail to build. This is to ensure your site is correctly configured to display
 
    Make sure the [`site`](https://docs.astro.build/en/reference/configuration-reference/#site) property is configured in your Astro config. This integration will not work without it.
 
