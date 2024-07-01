@@ -49,6 +49,8 @@ export interface PageDetails {
   image: string;
 }
 
+type NonEmptyArray<T> = [T, ...T[]];
+
 /** Types copied from Satori */
 export type SatoriWeight = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
 export type SatoriFontStyle = "normal" | "italic";
@@ -62,5 +64,5 @@ export interface SatoriFontOptions {
 export interface SatoriOptions {
   width: number;
   height: number;
-  fonts: SatoriFontOptions[];
+  fonts: NonEmptyArray<SatoriFontOptions>;
 }
