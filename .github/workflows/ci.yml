@@ -1,0 +1,14 @@
+on:
+  push:
+  pull_request:
+name: ci
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+      - run: cd example && npm ci && npm run build
