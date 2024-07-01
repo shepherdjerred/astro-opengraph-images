@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.2](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.6.1...v1.6.2) (2024-07-01)
+
+
+### Bug Fixes
+
+* remove type ([0400a2e](https://github.com/shepherdjerred/astro-opengraph-images/commit/0400a2e71d33dcd3fbc5e595e9f984f14097118b))
+
 ## [1.6.1](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.6.0...v1.6.1) (2024-07-01)
 
 
