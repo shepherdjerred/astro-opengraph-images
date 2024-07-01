@@ -59,7 +59,7 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
 
 1. Install the fonts you want to use. Fonts must be explicitly declared to be used for images. System fonts are _not_ available. For this quick start guide, we'll install the [Roboto](https://fontsource.org/fonts/roboto) font.
 
-   You can find more fonts on [Fontsource](https://fontsource.org/), or you can use any font file that you have. See the Satori documentation on [loading fonts](https://github.com/vercel/satori?tab=readme-ov-file#overview).
+   You can find more fonts on [Fontsource](https://fontsource.org/), or you can use any font file.
 
    ```bash
    npm i @fontsource/roboto
@@ -85,19 +85,13 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
    +          },
    +        ],
    +      },
-   +      render: presets.blackAndWhite, // TODO: make this the default to make the initial configuration more terse
+   +      render: presets.blackAndWhite,
    +    }),
      ],
    });
    ```
 
 1. Update your layout to add the appropriate `meta` tags. The [OpenGraph site](https://ogp.me/) has more information about valid tags.
-
-   The easiest way to do this is with the [`astro-seo`](https://github.com/jonasmerlin/astro-seo) project. Install it:
-
-   ```bash
-   npm i astro-seo
-   ```
 
    ```diff
    ---
@@ -120,29 +114,27 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
        <meta name="generator" content={Astro.generator} />
        <title>{title}</title>
+
+   +     <SEO
+   +       openGraph=\{\{
+   +         basic: {
+   +           title: title,
+   +           // Add the correct type from https://ogp.me/#types
+   +           type: "website",
+   +           image: TODO: add some function to determine the URL at build time,
+   +           url: url,
+   +         },
+   +         optional: {
+   +           description: "My page description",
+   +         },
+   +       \}\}
+   +     />
+     </head>
+     <body>
+       <slot />
+     </body>
+   </html>
    ```
-
--     <SEO
--       openGraph={{
--         basic: {
--           title: title,
--           // Add the correct type from https://ogp.me/#types
--           type: "website",
--           image: TODO: add some function to determine the URL at build time,
--           url: url,
--         },
--         optional: {
--           description: "My page description",
--         },
--       }}
--     />
-  </head>
-  <body>
-    <slot />
-  </body>
-</html>
-
-```
 
 1. Confirm that your OpenGraph images are accessible. After you deploy these changes, navigate to [OpenGraph.xyz](https://www.opengraph.xyz/) and test your site.
 
@@ -214,4 +206,3 @@ Here are some similar libraries using Satori and Astro. I haven't done a feature
 - https://github.com/cijiugechu/astro-satori (Possibly dead, hasn't been updated in a year)
 - https://github.com/kevinzunigacuellar/astro-satori (Possibly dead, hasn't been updated in a year)
 - https://github.com/rumaan/astro-vercel-og (Possibly dead, hasn't been updated in a year)
-```
