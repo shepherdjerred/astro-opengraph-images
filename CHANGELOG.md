@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.5.0...v1.6.0) (2024-07-01)
+
+
+### Features
+
+* polish ([8b46f0b](https://github.com/shepherdjerred/astro-opengraph-images/commit/8b46f0bb710e805c01e4658a4fda02793004e78c))
+
 ## [1.5.0](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.4.1...v1.5.0) (2024-07-01)
 
 
