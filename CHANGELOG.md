@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.1](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.6.0...v1.6.1) (2024-07-01)
+
+
+### Bug Fixes
+
+* correct preset return types ([21e668a](https://github.com/shepherdjerred/astro-opengraph-images/commit/21e668acc0c426a07435af73e4ccbae351d83d40))
+
 ## [1.6.0](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.5.0...v1.6.0) (2024-07-01)
 
 
