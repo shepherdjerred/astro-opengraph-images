@@ -54,8 +54,8 @@ async function handlePage({ page, options, render, dir, logger }: HandlePageInpu
   let pngFile = htmlFile.replace(/\.html$/, ".png");
 
   // remove leading dist/ from the path
-  pngFile = pngFile.replace("dist/", "");
   fs.writeFileSync(pngFile, resvg.render().asPng());
+  pngFile = pngFile.replace("dist/", "");
 
   // check that the og:image property matches the sitePath
   if (pageDetails.image !== pngFile) {

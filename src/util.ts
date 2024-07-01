@@ -30,6 +30,13 @@ export function getImagePath({ url }: { url: URL }): string {
     target = target + ".png";
   }
 
+  // Astro creates these as top-level files rather than in a folder
+  if (target === "/404/index.png") {
+    return "404.png";
+  } else if (target === "/500/index.png") {
+    return "500.png";
+  }
+
   // remove leading slash
   target = target.slice(1);
 
