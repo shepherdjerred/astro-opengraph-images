@@ -57,10 +57,15 @@ async function handlePage({ page, options, render, dir, logger }: HandlePageInpu
   fs.writeFileSync(pngFile, resvg.render().asPng());
   pngFile = pngFile.replace("dist/", "");
 
+  // convert the image path to a URL
+  let imageUrl = new URL(pageDetails.image).pathname;
+  // remove leading slash
+  imageUrl = imageUrl.slice(1);
+
   // check that the og:image property matches the sitePath
-  if (pageDetails.image !== pngFile) {
+  if (imageUrl !== pngFile) {
     throw new Error(
-      `The og:image property in ${htmlFile} (${pageDetails.image}) does not match the generated image (${pngFile}).`,
+      `The og:image property in ${htmlFile} (${imageUrl}) does not match the generated image (${pngFile}).`,
     );
   }
 

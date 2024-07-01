@@ -7,9 +7,9 @@ interface Props {
 }
 
 const { title } = Astro.props;
-const { url } = Astro;
+const { url, site } = Astro;
 
-const openGraphImageUrl = getImagePath({ url });
+const openGraphImageUrl = getImagePath({ url, site });
 ---
 
 <!doctype html>

@@ -91,7 +91,30 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
    });
    ```
 
-1. Update your layout to add the appropriate `meta` tags. The [OpenGraph site](https://ogp.me/) has more information about valid tags.
+1. Update your Astro layout to add the appropriate `meta` tags. The [OpenGraph site](https://ogp.me/) has more information about valid tags.
+
+   The following `meta` tags must be defined:
+
+   - `og:title`
+     - Optional. This field may be used when generating images.
+   - `og:type`
+     - See the [Open Graph documentation](https://ogp.me/#types) for valid values.
+   - `og:image`
+     - Use the `getImagePath` function to set this (example shown below).
+   - `og:description`
+     - Optional. This field may be used when generating images.
+
+   If the above fields are not set, then the your site will fail to build. Additionally, if the value of `og:image` does not match what this integration expects, the site will fail to build.
+
+   Make sure the [`site`](https://docs.astro.build/en/reference/configuration-reference/#site) property is configured in your Astro config. This integration will not work without it.
+
+   Install the [`astro-seo`](https://github.com/jonasmerlin/astro-seo) package to make this a bit easier:
+
+   ```bash
+   npm i astro-seo
+   ```
+
+   Update your Astro layout:
 
    ```diff
    ---
@@ -103,6 +126,7 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
 
    const { title } = Astro.props;
    +const { url, site } = Astro;
+   +const openGraphImageUrl = getImagePath({ url, site });
    ---
 
    <!doctype html>
@@ -120,7 +144,6 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
    +        {
    +          basic: {
    +            title: title,
-   +            // Add the correct type from https://ogp.me/#types
    +            type: "website",
    +            image: openGraphImageUrl,
    +            url: url,
@@ -138,49 +161,152 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
    </html>
    ```
 
-1. Confirm that your OpenGraph images are accessible. After you deploy these changes, navigate to [OpenGraph.xyz](https://www.opengraph.xyz/) and test your site.
+1. Build your site. You should see a `.png` file next to each `.html` page in your `dist` folder. Double-check that the `og:image` proprety in your `.html` file matches the path to the `.png` file.
+
+1. Deploy your site. You can verify that your images are correct by:
+
+- Sending a link to your site in an application that supports Open Graph like iMessage, Slack, Discord, etc.
+- Visit [opengraph.xyz](http://opengraph.xyz/) and test your site.
+
+these changes, navigate to [OpenGraph.xyz](https://www.opengraph.xyz/) and test your site.
 
 ## Presets
 
 Presets are located in [`src/presets/`](https://github.com/shepherdjerred/astro-opengraph-images/tree/main/src/presets). [Open a pull request](https://github.com/shepherdjerred/astro-opengraph-images/compare) to contribute a preset you've created.
 
+Note: some presets use the [`tw-to-css`](https://github.com/vinicoder/tw-to-css) library. You'll need to install this dependency separately when using one of these presets. You'll see an error if the library is not already installed.
+
+```bash
+npm i tw-to-css
+```
+
 ### backgroundImage
+
+```typescript
+import opengraphImages, { presets } from "astro-opengraph-images";
+
+opengraphImages({
+  options: {
+  render: presets.backgroundImage,
+}),
+```
 
 ![](assets/presets/backgroundImage.png)
 
 ### blackAndWhite
 
+```typescript
+import opengraphImages, { presets } from "astro-opengraph-images";
+
+opengraphImages({
+  options: {
+  render: presets.blackAndWhite,
+}),
+```
+
 ![](assets/presets/blackAndWhite.png)
 
 ### brandedLogo
+
+```typescript
+import opengraphImages, { presets } from "astro-opengraph-images";
+
+opengraphImages({
+  options: {
+  render: presets.brandedLogo,
+}),
+```
 
 ![](assets/presets/brandedLogo.png)
 
 ### gradients
 
+```typescript
+import opengraphImages, { presets } from "astro-opengraph-images";
+
+opengraphImages({
+  options: {
+  render: presets.gradients,
+}),
+```
+
 ![](assets/presets/gradients.png)
 
 ### podcast
+
+```typescript
+import opengraphImages, { presets } from "astro-opengraph-images";
+
+opengraphImages({
+  options: {
+  render: presets.podcast,
+}),
+```
 
 ![](assets/presets/podcast.png)
 
 ### rauchg
 
+```typescript
+import opengraphImages, { presets } from "astro-opengraph-images";
+
+opengraphImages({
+  options: {
+  render: presets.rauchg,
+}),
+```
+
 ![](assets/presets/rauchg.png)
 
 ### simpleBlog
+
+```typescript
+import opengraphImages, { presets } from "astro-opengraph-images";
+
+opengraphImages({
+  options: {
+  render: presets.simpleBlog,
+}),
+```
 
 ![](assets/presets/simpleBlog.png)
 
 ### tailwind
 
+```typescript
+import opengraphImages, { presets } from "astro-opengraph-images";
+
+opengraphImages({
+  options: {
+  render: presets.tailwind,
+}),
+```
+
 ![](assets/presets/tailwind.png)
 
 ### vercel
 
+```typescript
+import opengraphImages, { presets } from "astro-opengraph-images";
+
+opengraphImages({
+  options: {
+  render: presets.vercel,
+}),
+```
+
 ![](assets/presets/vercel.png)
 
 ### waveSvg
+
+```typescript
+import opengraphImages, { presets } from "astro-opengraph-images";
+
+opengraphImages({
+  options: {
+  render: presets.waveSvg,
+}),
+```
 
 ![](assets/presets/waveSvg.png)
 
