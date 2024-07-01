@@ -59,11 +59,11 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
 
 1. Install the fonts you want to use. Fonts must be explicitly declared to be used for images. System fonts are _not_ available. For this quick start guide, we'll install the [Roboto](https://fontsource.org/fonts/roboto) font.
 
-   You can find more fonts on [Fontsource](https://fontsource.org/), or you can use any font file.
-
    ```bash
    npm i @fontsource/roboto
    ```
+
+   You can find more fonts on [Fontsource](https://fontsource.org/), or you can use any font file.
 
 1. Configure the integration in your `astro.config.js` file:
 
@@ -115,20 +115,22 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
        <meta name="generator" content={Astro.generator} />
        <title>{title}</title>
 
-   +     <SEO
-   +       openGraph=\{\{
-   +         basic: {
-   +           title: title,
-   +           // Add the correct type from https://ogp.me/#types
-   +           type: "website",
-   +           image: TODO: add some function to determine the URL at build time,
-   +           url: url,
-   +         },
-   +         optional: {
-   +           description: "My page description",
-   +         },
-   +       \}\}
-   +     />
+   +    <SEO
+   +      openGraph={
+   +        {
+   +          basic: {
+   +            title: title,
+   +            // Add the correct type from https://ogp.me/#types
+   +            type: "website",
+   +            image: openGraphImageUrl,
+   +            url: url,
+   +          },
+   +          optional: {
+   +            description: "My page description",
+   +          },
+   +        }
+   +      }
+   +    />
      </head>
      <body>
        <slot />
