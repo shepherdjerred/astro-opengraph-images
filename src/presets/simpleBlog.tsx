@@ -1,9 +1,10 @@
 import React from "react";
 import type { RenderFunctionInput } from "../types.js";
-import { twj } from "tw-to-css";
 
 // from https://fullstackheroes.com/resources/vercel-og-templates/simple/
-export function simpleBlog({ title, description }: RenderFunctionInput): React.ReactNode {
+export async function simpleBlog({ title, description }: RenderFunctionInput): Promise<React.ReactNode> {
+  const twj = (await import("tw-to-css")).twj;
+
   return (
     <div style={twj("h-full w-full flex items-start justify-start border border-blue-500 border-[12px] bg-gray-50")}>
       <div style={twj("flex items-start justify-start h-full")}>

@@ -1,9 +1,10 @@
 import React from "react";
 import type { RenderFunctionInput } from "../types.js";
-import { twj } from "tw-to-css";
 
 // from https://fullstackheroes.com/resources/vercel-og-templates/wave/
-export function waveSvg({ title }: RenderFunctionInput): React.ReactNode {
+export async function waveSvg({ title }: RenderFunctionInput): Promise<React.ReactNode> {
+  const twj = (await import("tw-to-css")).twj;
+
   return (
     <div style={twj("h-full w-full flex items-start justify-start bg-yellow-50 relative")}>
       <h1 style={twj("text-7xl p-20 font-bold text-left text-gray-900")}>{title}</h1>

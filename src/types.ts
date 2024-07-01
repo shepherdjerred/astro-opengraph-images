@@ -38,12 +38,15 @@ export type RenderFunctionInput = {
 } & PageDetails;
 
 /** A function that renders some page input to React */
-export type RenderFunction = (input: RenderFunctionInput) => ReactNode;
+export type RenderFunction = (input: RenderFunctionInput) => Promise<ReactNode>;
 
 /** Basic information about a page */
 export interface PageDetails {
-  title?: string;
+  title: string;
   description?: string;
+  url: string;
+  type: string;
+  image: string;
 }
 
 /** Types copied from Satori */

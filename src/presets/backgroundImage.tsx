@@ -1,10 +1,11 @@
 import React from "react";
 import type { RenderFunctionInput } from "../types.js";
-import { twj } from "tw-to-css";
 
 // from https://fullstackheroes.com/resources/vercel-og-templates/full-bg-image/
-export function backgroundImage({ title }: RenderFunctionInput): React.ReactNode {
+export async function backgroundImage({ title }: RenderFunctionInput): Promise<React.ReactNode> {
   const image = "https://picsum.photos/seed/picsum/1200/627";
+
+  const twj = (await import("tw-to-css")).twj;
 
   return (
     <div style={twj("h-full w-full flex items-start justify-start bg-white")}>

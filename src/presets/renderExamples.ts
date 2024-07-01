@@ -2,13 +2,17 @@ import { Resvg } from "@resvg/resvg-js";
 import satori, { type SatoriOptions } from "satori";
 import { presets } from "./index.js";
 import * as fs from "fs/promises";
+import type { RenderFunctionInput } from "../types.js";
 
 // Updates the examples for the README
 // Run with `npx tsx src/presets/renderExamples.ts`
 async function renderExamples() {
-  const page = {
+  const page: RenderFunctionInput = {
     title: "3D Graphics with OpenGL",
     description: "An introduction to 3D graphics rendering and OpenGL.",
+    url: "https://example.com/3d-graphics",
+    type: "article",
+    image: "https://example.com/3d-graphics.png",
     pathname: "empty",
   };
 
@@ -26,7 +30,8 @@ async function renderExamples() {
   };
 
   const promises = Object.entries(presets).map(async ([name, preset]) => {
-    const svg = await satori(preset(page), options);
+    const node = await preset(page);
+    const svg = await satori(node, options);
     const resvg = new Resvg(svg, {
       font: {
         loadSystemFonts: false,

@@ -1,8 +1,9 @@
 import React from "react";
 import type { RenderFunctionInput } from "../types.js";
-import { twj } from "tw-to-css";
 
-export function tailwind({ title, description }: RenderFunctionInput): React.ReactNode {
+export async function tailwind({ title, description }: RenderFunctionInput): Promise<React.ReactNode> {
+  const twj = (await import("tw-to-css")).twj;
+
   return (
     // Modified based on https://tailwindui.com/components/marketing/sections/cta-sections
     <div style={twj("flex flex-col w-full h-full items-center justify-center bg-white")}>

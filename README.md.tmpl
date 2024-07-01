@@ -93,12 +93,10 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
 
 1. Update your layout to add the appropriate `meta` tags. The [OpenGraph site](https://ogp.me/) has more information about valid tags.
 
-   The integration will replace `[[OPENGRAPH IMAGE]]` with the path to the image it generated for that page. Note: `site` must be defined in your Astro config.
-
-   At a minimum, you should define the tags below:
-
    ```diff
    ---
+   + import { SEO } from "astro-seo";
+
    interface Props {
      title: string;
    }
@@ -117,13 +115,20 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
        <meta name="generator" content={Astro.generator} />
        <title>{title}</title>
 
-   +    <meta name="description" content="Your page description" />
-
-   +    <meta property="og:title" content="{title}" />
-   +    <!-- Add the correct type from https://ogp.me/#types -->
-   +    <meta property="og:type" content="website" />
-   +    <meta property="og:url" content={url} />
-   +    <meta property="og:image" content={`${site?.toString()}[[OPENGRAPH IMAGE]]`} />
+  +     <SEO
+  +       openGraph={{
+  +         basic: {
+  +           title: title,
+  +           // Add the correct type from https://ogp.me/#types
+  +           type: "website",
+  +           image: TODO: add some function to determine the URL at build time,
+  +           url: url,
+  +         },
+  +         optional: {
+  +           description: "My page description",
+  +         },
+  +       }}
+  +     />
      </head>
      <body>
        <slot />

@@ -14,5 +14,32 @@ export function getFilePath({ dir, page }: { dir: string; page: string }) {
     target = target + ".html";
   }
 
+  return trim(target);
+}
+
+export function getImagePath({ url }: { url: URL }): string {
+  let target = url.pathname;
+
+  console.log("target", target);
+
+  // if url ends with a slash, it's a directory
+  // add index.png to the end
+  if (target.endsWith("/")) {
+    target = target + "index.png";
+  } else {
+    target = target + ".png";
+  }
+
+  // remove leading slash
+  target = target.slice(1);
+
   return target;
+}
+
+function trim(input: string): string {
+  // remove local filesystem pathname
+  input = input.replace(process.cwd(), "");
+  input = input.replace("/dist/", "dist/");
+
+  return input;
 }

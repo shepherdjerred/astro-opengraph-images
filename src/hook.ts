@@ -5,7 +5,6 @@ import * as fs from "fs";
 import type { AstroIntegrationLogger } from "astro";
 import { extract } from "./extract.js";
 import { getFilePath } from "./util.js";
-import { placeholder } from "./constants.js";
 
 export async function buildDoneHook({
   logger,
@@ -36,11 +35,12 @@ interface HandlePageInput {
 }
 
 async function handlePage({ page, options, render, dir, logger }: HandlePageInput) {
-  const file = getFilePath({ dir: dir.pathname, page: page.pathname });
-  const html = fs.readFileSync(file).toString();
-  const data = extract(html);
+  const htmlFile = getFilePath({ dir: dir.pathname, page: page.pathname });
+  const html = fs.readFileSync(htmlFile).toString();
+  const pageDetails = extract(html);
 
-  const svg = await satori(render({ ...page, ...data }), options);
+  const reactNode = await render({ ...page, ...pageDetails });
+  const svg = await satori(reactNode, options);
   const resvg = new Resvg(svg, {
     font: {
       loadSystemFonts: false,
@@ -51,16 +51,18 @@ async function handlePage({ page, options, render, dir, logger }: HandlePageInpu
     },
   });
 
-  const target = file.replace(/\.html$/, ".png");
-  fs.writeFileSync(target, resvg.render().asPng());
+  let pngFile = htmlFile.replace(/\.html$/, ".png");
 
-  // remove local filesystem pathname
-  let sitePath = target.replace(process.cwd(), "");
   // remove leading dist/ from the path
-  sitePath = sitePath.replace("/dist/", "");
+  pngFile = pngFile.replace("dist/", "");
+  fs.writeFileSync(pngFile, resvg.render().asPng());
 
-  const content = fs.readFileSync(file).toString();
-  fs.writeFileSync(file, content.replace(placeholder, sitePath));
+  // check that the og:image property matches the sitePath
+  if (pageDetails.image !== pngFile) {
+    throw new Error(
+      `The og:image property in ${htmlFile} (${pageDetails.image}) does not match the generated image (${pngFile}).`,
+    );
+  }
 
-  logger.info(`Generated ${sitePath} for ${page.pathname}`);
+  logger.info(`Generated ${pngFile} for ${htmlFile}.`);
 }

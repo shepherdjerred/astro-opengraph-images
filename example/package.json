@@ -13,7 +13,8 @@
     "@astrojs/check": "^0.7.0",
     "@fontsource/roboto": "^5.0.13",
     "astro": "^4.11.3",
-    "astro-opengraph-images": "^1.4.0",
+    "astro-opengraph-images": "../",
+    "astro-seo": "^0.8.4",
     "typescript": "^5.5.2"
   }
 }
