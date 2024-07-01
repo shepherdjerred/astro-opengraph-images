@@ -24,10 +24,11 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
 > [!WARNING]
 > This integration has only been tested with statically rendered sites. It is untested with server-side rendering.
 
+- Written in TypeScript
 - Generate Open Graph images for every page on your site.
 - Use a preset renderer to get started quickly.
-- Images are fully customizable.
-- Use React + Tailwind syntax or vanilla JavaScript to define your own custom images.
+- Images are fully customizable using [Satori](https://github.com/vercel/satori).
+- Use React/JSX + Tailwind syntax or vanilla JavaScript to define your own custom images.
 - Supports both static pages and Astro content collections.
 - Pages can be written in Markdown, MDX, HTML, or any other format.
 
@@ -63,9 +64,7 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
    npm i @fontsource/roboto
    ```
 
-   You can find more fonts on [Fontsource](https://fontsource.org/), or you can use any font file.
-
-   See [Satori's font documentation](https://github.com/vercel/satori?tab=readme-ov-file#fonts) for more information.
+   You can find more fonts on [Fontsource](https://fontsource.org/), or you can use any font file that you have. See [Satori's font documentation](https://github.com/vercel/satori?tab=readme-ov-file#fonts) for more information.
 
 1. Configure the integration in your `astro.config.js` file:
 
@@ -169,6 +168,16 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
 
    - Sending a link to your site in an application that supports Open Graph like iMessage, Slack, Discord, etc.
    - Visit [opengraph.xyz](http://opengraph.xyz/) and test your site.
+
+## Examples
+
+There is an example site using this integration under [`example/`](https://github.com/shepherdjerred/astro-opengraph-images/tree/main/example).
+
+### Sites Using This
+
+If you're using this project, [open a PR](https://github.com/shepherdjerred/astro-opengraph-images/compare) to add your site to this list.
+
+- [sjer.red](https://sjer.red) ([source](https://github.com/shepherdjerred/sjer.red))
 
 ## Custom Renderers
 
