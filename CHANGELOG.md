@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.6](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.6.5...v1.6.6) (2024-07-02)
+
+
+### Bug Fixes
+
+* update README steps ([8726aa0](https://github.com/shepherdjerred/astro-opengraph-images/commit/8726aa0b7f76f73b097077d9168cd17a3f0cb805))
+
 ## [1.6.5](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.6.4...v1.6.5) (2024-07-02)
 
 
