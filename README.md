@@ -212,13 +212,13 @@ npm i tw-to-css
 
 ### `backgroundImage`
 
-```typescript
+```diff
 import opengraphImages, { presets } from "astro-opengraph-images";
 
 export default defineConfig({
   integrations: [
     opengraphImages({
-      render: presets.backgroundImage,
++      render: presets.backgroundImage,
     }),
   ],
 });
@@ -228,13 +228,13 @@ export default defineConfig({
 
 ### `blackAndWhite`
 
-```typescript
+```diff
 import opengraphImages, { presets } from "astro-opengraph-images";
 
 export default defineConfig({
   integrations: [
     opengraphImages({
-      render: presets.blackAndWhite,
++      render: presets.blackAndWhite,
     }),
   ],
 });
@@ -244,13 +244,13 @@ export default defineConfig({
 
 ### `brandedLogo`
 
-```typescript
+```diff
 import opengraphImages, { presets } from "astro-opengraph-images";
 
 export default defineConfig({
   integrations: [
     opengraphImages({
-      render: presets.brandedLogo,
++      render: presets.brandedLogo,
     }),
   ],
 });
@@ -260,13 +260,13 @@ export default defineConfig({
 
 ### `gradients`
 
-```typescript
+```diff
 import opengraphImages, { presets } from "astro-opengraph-images";
 
 export default defineConfig({
   integrations: [
     opengraphImages({
-      render: presets.gradients,
++      render: presets.gradients,
     }),
   ],
 });
@@ -276,13 +276,13 @@ export default defineConfig({
 
 ### `podcast`
 
-```typescript
+```diff
 import opengraphImages, { presets } from "astro-opengraph-images";
 
 export default defineConfig({
   integrations: [
     opengraphImages({
-      render: presets.podcast,
++      render: presets.podcast,
     }),
   ],
 });
@@ -292,13 +292,13 @@ export default defineConfig({
 
 ### `rauchg`
 
-```typescript
+```diff
 import opengraphImages, { presets } from "astro-opengraph-images";
 
 export default defineConfig({
   integrations: [
     opengraphImages({
-      render: presets.rauchg,
++      render: presets.rauchg,
     }),
   ],
 });
@@ -308,13 +308,13 @@ export default defineConfig({
 
 ### `simpleBlog`
 
-```typescript
+```diff
 import opengraphImages, { presets } from "astro-opengraph-images";
 
 export default defineConfig({
   integrations: [
     opengraphImages({
-      render: presets.simpleBlog,
++      render: presets.simpleBlog,
     }),
   ],
 });
@@ -324,13 +324,13 @@ export default defineConfig({
 
 ### `tailwind`
 
-```typescript
+```diff
 import opengraphImages, { presets } from "astro-opengraph-images";
 
 export default defineConfig({
   integrations: [
     opengraphImages({
-      render: presets.tailwind,
++      render: presets.tailwind,
     }),
   ],
 });
@@ -340,13 +340,13 @@ export default defineConfig({
 
 ### `vercel`
 
-```typescript
+```diff
 import opengraphImages, { presets } from "astro-opengraph-images";
 
 export default defineConfig({
   integrations: [
     opengraphImages({
-      render: presets.vercel,
++      render: presets.vercel,
     }),
   ],
 });
@@ -356,13 +356,13 @@ export default defineConfig({
 
 ### `waveSvg`
 
-```typescript
+```diff
 import opengraphImages, { presets } from "astro-opengraph-images";
 
 export default defineConfig({
   integrations: [
     opengraphImages({
-      render: presets.waveSvg,
++      render: presets.waveSvg,
     }),
   ],
 });

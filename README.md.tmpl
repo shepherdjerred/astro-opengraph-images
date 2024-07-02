@@ -213,13 +213,13 @@ npm i tw-to-css
 {{ range $preset := (ds "presets") -}}
 ### `{{ strings.ReplaceAll ".png" "" $preset }}`
 
-```typescript
+```diff
 import opengraphImages, { presets } from "astro-opengraph-images";
 
 export default defineConfig({
   integrations: [
     opengraphImages({
-      render: presets.{{ strings.ReplaceAll ".png" "" $preset }},
++      render: presets.{{ strings.ReplaceAll ".png" "" $preset }},
     }),
   ],
 });
