@@ -1,4 +1,18 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended"]
+  "extends": ["config:recommended"],
+  "automerge": true,
+  "pre-commit": {
+    "enabled": true
+  },
+  "schedule": ["after 3am on Sunday"],
+  "packageRules": [
+    {
+      "commitMessageTopic": "Node.js",
+      "excludePackageNames": ["calico/node", "docker.io/calico/node", "kindest/node"],
+      "matchDatasources": ["docker"],
+      "matchDepNames": ["node"],
+      "matchPackagePatterns": ["/node$"]
+    }
+  ]
 }
