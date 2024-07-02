@@ -53,7 +53,7 @@ export function extract(html: string): PageDetails {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     image: image!,
   };
-  if (description) {
+  if (description && description != title) {
     returnVal.description = description;
   }
   return returnVal;
