@@ -16,7 +16,7 @@ export async function buildDoneHook({
   options: IntegrationOptions;
   render: RenderFunction;
 }) {
-  logger.info("Generating OpenGraph images");
+  logger.info("Generating Open Graph images");
   for (const page of pages) {
     try {
       await handlePage({ page, options, render, dir, logger });
