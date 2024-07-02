@@ -115,7 +115,7 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
    });
    ```
 
-   This integration will not work without it.
+   The `site` property is required because Open Graph images must be referenced as an absolute URL.
 
    Install the [`astro-seo`](https://github.com/jonasmerlin/astro-seo) package to make this a bit easier:
 
