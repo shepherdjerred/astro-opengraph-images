@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.6.3](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.6.2...v1.6.3) (2024-07-02)
+
+
+### Bug Fixes
+
+* add more context to site ([3db768a](https://github.com/shepherdjerred/astro-opengraph-images/commit/3db768aef904a95915696accae28b9aa239a1419))
+* don't set description if it equals the title ([42763b5](https://github.com/shepherdjerred/astro-opengraph-images/commit/42763b523ff25ba8b88a7d4ce463f972974f3ddc))
+* formatting ([94ed9b9](https://github.com/shepherdjerred/astro-opengraph-images/commit/94ed9b99c8db98c284e9ffcc39b050ad3ab8e762))
+* regenerate README ([b8c204e](https://github.com/shepherdjerred/astro-opengraph-images/commit/b8c204e0e9b37868e43692fc1d57e795d8dbb456))
+* regenerate README ([531d5f4](https://github.com/shepherdjerred/astro-opengraph-images/commit/531d5f4780b273e317d608411c64fcba4f3e50db))
+* regenerate README ([4e432c6](https://github.com/shepherdjerred/astro-opengraph-images/commit/4e432c6059b7b6f3f10e54c75307cbbd3e204bf0))
+
 ## [1.6.2](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.6.1...v1.6.2) (2024-07-01)
 
 
