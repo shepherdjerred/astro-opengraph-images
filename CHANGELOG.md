@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.5](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.6.4...v1.6.5) (2024-07-02)
+
+
+### Bug Fixes
+
+* fix logger capitalization ([1405fb8](https://github.com/shepherdjerred/astro-opengraph-images/commit/1405fb8ee98e0d0bb4974e17f10b35d009bcf7f9))
+
 ## [1.6.4](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.6.3...v1.6.4) (2024-07-02)
 
 
