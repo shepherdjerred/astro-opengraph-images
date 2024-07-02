@@ -92,22 +92,9 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
    });
    ```
 
-1. Update your Astro layout to add the appropriate `meta` tags. The [OpenGraph site](https://ogp.me/) has more information about valid tags.
+1. Set the `[`site`](https://docs.astro.build/en/reference/configuration-reference/#site) property is configured in your Astro config:
 
-   The following `meta` tags must be defined:
-
-   - `og:title`
-     - This field may be used when generating images.
-   - `og:type`
-     - See the [Open Graph documentation](https://ogp.me/#types) for valid values.
-   - `og:image`
-     - Set this to the return value of `getImagePath` (example shown below).
-   - `og:description`
-     - Optional. This field may be used when generating images.
-
-   Your site will fail to build if the tags above are not set. Additionally, if the value of `og:image` does not match what this integration expects, the site will fail to build. This is to ensure your site is correctly configured to display Open Graph images.
-
-   Make sure the [`site`](https://docs.astro.build/en/reference/configuration-reference/#site) property is configured in your Astro config:
+   Open Graph requires URLs to be absolute, including the domain your site is hosted at. This integration uses the site defined in your Astro config to create the correct URLs for Open Graph, so `site` must be defined.
 
    ```diff
    export default defineConfig({
@@ -130,15 +117,31 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
    });
    ```
 
-   The `site` property is required because Open Graph images must be referenced as an absolute URL.
+1. Update your main Astro layout with the appropriate `meta` tags. The [Open Graph site](https://ogp.me/) has more information possible tags.
 
-   Install the [`astro-seo`](https://github.com/jonasmerlin/astro-seo) package to make this a bit easier:
+   The following `meta` tags must be defined:
+
+   - `og:title`
+     - This field may be used when generating images.
+   - `og:type`
+     - See the [Open Graph documentation](https://ogp.me/#types) for valid values.
+   - `og:image`
+     - Set this to the return value of `getImagePath` (example shown below).
+   - If the value of `og:image` does not match what this integration expects then your site will fail to build. This will ensure your site is correctly configured to display Open Graph images.
+   - `og:description`
+     - Optional. This field may be used when generating images.
+
+   Your site will fail to build if the tags above are not set.
+
+   - Option 1: Use the [`astro-seo`](https://github.com/jonasmerlin/astro-seo) package:
+
+   Install the `astro-seo` package:
 
    ```bash
    npm i astro-seo
    ```
 
-   Update your Astro layout:
+   Update your Astro layout to use the `SEO` component:
 
    ```diff
    ---
@@ -184,6 +187,8 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
      </body>
    </html>
    ```
+
+   - Option 2: Manually add the `meta` tags to your Astro layout.
 
 1. Build your site. You should see a `.png` file next to each `.html` page in your `dist` folder. Double-check that the `og:image` proprety in your `.html` file matches the path to the `.png` file.
 
