@@ -34,7 +34,7 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
 
 ## Quick Start
 
-1. Add this integration to your `astro.config.js`:
+1. Add this integration to your Astro config:
 
    - Option 1: use the `astro` command:
 
@@ -42,7 +42,7 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
      npx astro add astro-opengraph-images
      ```
 
-   - Option 2: install the package and add the integration to your `astro.config.js`:
+   - Option 2: install the package and add the integration to your Astro config:
 
      ```bash
      npm i astro-opengraph-images
@@ -66,7 +66,7 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
 
    You can find more fonts on [Fontsource](https://fontsource.org/), or you can use any font file that you have. See [Satori's font documentation](https://github.com/vercel/satori?tab=readme-ov-file#fonts) for more information.
 
-1. Configure the integration in your `astro.config.js` file:
+1. Configure the integration in your Astro config:
 
    ```diff
    -import opengraphImages from "astro-opengraph-images";
@@ -107,7 +107,15 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
 
    Your site will fail to build if the tags above are not set. Additionally, if the value of `og:image` does not match what this integration expects, the site will fail to build. This is to ensure your site is correctly configured to display Open Graph images.
 
-   Make sure the [`site`](https://docs.astro.build/en/reference/configuration-reference/#site) property is configured in your Astro config. This integration will not work without it.
+   Make sure the [`site`](https://docs.astro.build/en/reference/configuration-reference/#site) property is configured in your Astro config:
+
+   ```typescript
+   export default defineConfig({
+   +  site: "https://<your site>.com",
+   });
+   ```
+
+   This integration will not work without it.
 
    Install the [`astro-seo`](https://github.com/jonasmerlin/astro-seo) package to make this a bit easier:
 
@@ -207,11 +215,13 @@ npm i tw-to-css
 ```typescript
 import opengraphImages, { presets } from "astro-opengraph-images";
 
-opengraphImages({
-  options: {
-    render: presets.backgroundImage,
-  }
-}),
+export default defineConfig({
+  integrations: [
+    opengraphImages({
+      render: presets.backgroundImage,
+    }),
+  ],
+});
 ```
 
 ![](assets/presets/backgroundImage.png)
@@ -221,11 +231,13 @@ opengraphImages({
 ```typescript
 import opengraphImages, { presets } from "astro-opengraph-images";
 
-opengraphImages({
-  options: {
-    render: presets.blackAndWhite,
-  }
-}),
+export default defineConfig({
+  integrations: [
+    opengraphImages({
+      render: presets.blackAndWhite,
+    }),
+  ],
+});
 ```
 
 ![](assets/presets/blackAndWhite.png)
@@ -235,11 +247,13 @@ opengraphImages({
 ```typescript
 import opengraphImages, { presets } from "astro-opengraph-images";
 
-opengraphImages({
-  options: {
-    render: presets.brandedLogo,
-  }
-}),
+export default defineConfig({
+  integrations: [
+    opengraphImages({
+      render: presets.brandedLogo,
+    }),
+  ],
+});
 ```
 
 ![](assets/presets/brandedLogo.png)
@@ -249,11 +263,13 @@ opengraphImages({
 ```typescript
 import opengraphImages, { presets } from "astro-opengraph-images";
 
-opengraphImages({
-  options: {
-    render: presets.gradients,
-  }
-}),
+export default defineConfig({
+  integrations: [
+    opengraphImages({
+      render: presets.gradients,
+    }),
+  ],
+});
 ```
 
 ![](assets/presets/gradients.png)
@@ -263,11 +279,13 @@ opengraphImages({
 ```typescript
 import opengraphImages, { presets } from "astro-opengraph-images";
 
-opengraphImages({
-  options: {
-    render: presets.podcast,
-  }
-}),
+export default defineConfig({
+  integrations: [
+    opengraphImages({
+      render: presets.podcast,
+    }),
+  ],
+});
 ```
 
 ![](assets/presets/podcast.png)
@@ -277,11 +295,13 @@ opengraphImages({
 ```typescript
 import opengraphImages, { presets } from "astro-opengraph-images";
 
-opengraphImages({
-  options: {
-    render: presets.rauchg,
-  }
-}),
+export default defineConfig({
+  integrations: [
+    opengraphImages({
+      render: presets.rauchg,
+    }),
+  ],
+});
 ```
 
 ![](assets/presets/rauchg.png)
@@ -291,11 +311,13 @@ opengraphImages({
 ```typescript
 import opengraphImages, { presets } from "astro-opengraph-images";
 
-opengraphImages({
-  options: {
-    render: presets.simpleBlog,
-  }
-}),
+export default defineConfig({
+  integrations: [
+    opengraphImages({
+      render: presets.simpleBlog,
+    }),
+  ],
+});
 ```
 
 ![](assets/presets/simpleBlog.png)
@@ -305,11 +327,13 @@ opengraphImages({
 ```typescript
 import opengraphImages, { presets } from "astro-opengraph-images";
 
-opengraphImages({
-  options: {
-    render: presets.tailwind,
-  }
-}),
+export default defineConfig({
+  integrations: [
+    opengraphImages({
+      render: presets.tailwind,
+    }),
+  ],
+});
 ```
 
 ![](assets/presets/tailwind.png)
@@ -319,11 +343,13 @@ opengraphImages({
 ```typescript
 import opengraphImages, { presets } from "astro-opengraph-images";
 
-opengraphImages({
-  options: {
-    render: presets.vercel,
-  }
-}),
+export default defineConfig({
+  integrations: [
+    opengraphImages({
+      render: presets.vercel,
+    }),
+  ],
+});
 ```
 
 ![](assets/presets/vercel.png)
@@ -333,11 +359,13 @@ opengraphImages({
 ```typescript
 import opengraphImages, { presets } from "astro-opengraph-images";
 
-opengraphImages({
-  options: {
-    render: presets.waveSvg,
-  }
-}),
+export default defineConfig({
+  integrations: [
+    opengraphImages({
+      render: presets.waveSvg,
+    }),
+  ],
+});
 ```
 
 ![](assets/presets/waveSvg.png)
