@@ -1,5 +1,4 @@
 import { defineConfig } from "astro/config";
-
 import opengraphImages, { presets } from "astro-opengraph-images";
 
 // https://astro.build/config

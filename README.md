@@ -111,64 +111,82 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
 
    ```diff
    export default defineConfig({
-   +  site: "https://<your site>.com",
-   });
    ```
 
-   The `site` property is required because Open Graph images must be referenced as an absolute URL.
+- site: "https://<your site>.com",
+  integrations: [
+  opengraphImages({
+  options: {
+  fonts: [
+  {
+  name: "Roboto",
+  weight: 400,
+  style: "normal",
+  data: fs.readFileSync("node_modules/@fontsource/roboto/files/roboto-latin-400-normal.woff"),
+  },
+  ],
+  },
+  render: presets.blackAndWhite,
+  }),
+  ],
+  });
 
-   Install the [`astro-seo`](https://github.com/jonasmerlin/astro-seo) package to make this a bit easier:
+````
 
-   ```bash
-   npm i astro-seo
-   ```
+The `site` property is required because Open Graph images must be referenced as an absolute URL.
 
-   Update your Astro layout:
+Install the [`astro-seo`](https://github.com/jonasmerlin/astro-seo) package to make this a bit easier:
 
-   ```diff
-   ---
-   + import { SEO } from "astro-seo";
+```bash
+npm i astro-seo
+````
 
-   interface Props {
-     title: string;
-   }
+Update your Astro layout:
 
-   const { title } = Astro.props;
-   +const { url, site } = Astro;
-   +const openGraphImageUrl = getImagePath({ url, site });
-   ---
+```diff
+---
++ import { SEO } from "astro-seo";
 
-   <!doctype html>
-   <html lang="en">
-     <head>
-       <meta charset="UTF-8" />
-       <meta name="description" content="Astro description" />
-       <meta name="viewport" content="width=device-width" />
-       <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-       <meta name="generator" content={Astro.generator} />
-       <title>{title}</title>
+interface Props {
+  title: string;
+}
 
-   +    <SEO
-   +      openGraph={
-   +        {
-   +          basic: {
-   +            title: title,
-   +            type: "website",
-   +            image: openGraphImageUrl,
-   +            url: url,
-   +          },
-   +          optional: {
-   +            description: "My page description",
-   +          },
-   +        }
-   +      }
-   +    />
-     </head>
-     <body>
-       <slot />
-     </body>
-   </html>
-   ```
+const { title } = Astro.props;
++const { url, site } = Astro;
++const openGraphImageUrl = getImagePath({ url, site });
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+
++    <SEO
++      openGraph={
++        {
++          basic: {
++            title: title,
++            type: "website",
++            image: openGraphImageUrl,
++            url: url,
++          },
++          optional: {
++            description: "My page description",
++          },
++        }
++      }
++    />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+```
 
 1. Build your site. You should see a `.png` file next to each `.html` page in your `dist` folder. Double-check that the `og:image` proprety in your `.html` file matches the path to the `.png` file.
 

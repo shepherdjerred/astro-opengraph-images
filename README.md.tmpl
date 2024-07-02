@@ -111,7 +111,22 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
 
    ```diff
    export default defineConfig({
-   +  site: "https://<your site>.com",
+  +  site: "https://<your site>.com",
+     integrations: [
+       opengraphImages({
+         options: {
+           fonts: [
+             {
+               name: "Roboto",
+               weight: 400,
+               style: "normal",
+               data: fs.readFileSync("node_modules/@fontsource/roboto/files/roboto-latin-400-normal.woff"),
+             },
+           ],
+         },
+         render: presets.blackAndWhite,
+       }),
+     ],
    });
    ```
 
