@@ -109,7 +109,7 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
 
    Make sure the [`site`](https://docs.astro.build/en/reference/configuration-reference/#site) property is configured in your Astro config:
 
-   ```typescript
+   ```diff
    export default defineConfig({
    +  site: "https://<your site>.com",
    });
