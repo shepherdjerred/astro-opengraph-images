@@ -34,6 +34,8 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
 
 ## Quick Start
 
+To better illustrate these steps, I've created a [video](https://www.loom.com/share/a66a65be8a4e48ec8612b78489db590d?sid=3e9f7cd6-68ec-49da-b942-75eb4608cb5e) following them to help others follow along.
+
 1. Add this integration to your Astro config:
 
    - Option 1: use the `astro` command:
@@ -145,8 +147,8 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
 
      ```diff
      ---
-     + import { SEO } from "astro-seo";
-     + import { getImagePath } from "astro-opengraph-images";
+     +import { SEO } from "astro-seo";
+     +import { getImagePath } from "astro-opengraph-images";
 
      interface Props {
        title: string;
