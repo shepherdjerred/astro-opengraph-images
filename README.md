@@ -92,9 +92,9 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
    });
    ```
 
-1. Set the `[`site`](https://docs.astro.build/en/reference/configuration-reference/#site) property is configured in your Astro config:
+1. Set the [`site`](https://docs.astro.build/en/reference/configuration-reference/#site) property in your Astro config:
 
-   Open Graph requires URLs to be absolute, including the domain your site is hosted at. This integration uses the site defined in your Astro config to create the correct URLs for Open Graph, so `site` must be defined.
+   Open Graph requires URLs to be absolute, including the domain your site is hosted at. This integration uses the site defined in your Astro config to create the correct URLs for Open Graph which is `site` must be defined.
 
    ```diff
    export default defineConfig({
@@ -127,7 +127,7 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
      - See the [Open Graph documentation](https://ogp.me/#types) for valid values.
    - `og:image`
      - Set this to the return value of `getImagePath` (example shown below).
-   - If the value of `og:image` does not match what this integration expects then your site will fail to build. This will ensure your site is correctly configured to display Open Graph images.
+     - If the value of `og:image` does not match what this integration expects then your site will fail to build. This will ensure your site is correctly configured to display Open Graph images.
    - `og:description`
      - Optional. This field may be used when generating images.
 
@@ -135,58 +135,58 @@ You've probably seen this in action when posting a link on Facebook, Twitter, Sl
 
    - Option 1: Use the [`astro-seo`](https://github.com/jonasmerlin/astro-seo) package:
 
-   Install the `astro-seo` package:
+     Install the `astro-seo` package:
 
-   ```bash
-   npm i astro-seo
-   ```
+     ```bash
+     npm i astro-seo
+     ```
 
-   Update your Astro layout to use the `SEO` component:
+     Update your Astro layout to use the `SEO` component:
 
-   ```diff
-   ---
-   + import { SEO } from "astro-seo";
+     ```diff
+     ---
+     + import { SEO } from "astro-seo";
 
-   interface Props {
-     title: string;
-   }
+     interface Props {
+       title: string;
+     }
 
-   const { title } = Astro.props;
-   +const { url, site } = Astro;
-   +const openGraphImageUrl = getImagePath({ url, site });
-   ---
+     const { title } = Astro.props;
+      +const { url, site } = Astro;
+     +const openGraphImageUrl = getImagePath({ url, site });
+     ---
 
-   <!doctype html>
-   <html lang="en">
-     <head>
-       <meta charset="UTF-8" />
-       <meta name="description" content="Astro description" />
-       <meta name="viewport" content="width=device-width" />
-       <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-       <meta name="generator" content={Astro.generator} />
-       <title>{title}</title>
+     <!doctype html>
+     <html lang="en">
+       <head>
+         <meta charset="UTF-8" />
+         <meta name="description" content="Astro description" />
+         <meta name="viewport" content="width=device-width" />
+         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+         <meta name="generator" content={Astro.generator} />
+         <title>{title}</title>
 
-   +    <SEO
-   +      openGraph={
-   +        {
-   +          basic: {
-   +            title: title,
-   +            type: "website",
-   +            image: openGraphImageUrl,
-   +            url: url,
-   +          },
-   +          optional: {
-   +            description: "My page description",
-   +          },
-   +        }
-   +      }
-   +    />
-     </head>
-     <body>
-       <slot />
-     </body>
-   </html>
-   ```
+     +    <SEO
+     +      openGraph={
+     +        {
+     +          basic: {
+     +            title: title,
+     +            type: "website",
+     +            image: openGraphImageUrl,
+     +            url: url,
+     +          },
+     +          optional: {
+     +            description: "My page description",
+     +          },
+     +        }
+     +      }
+     +    />
+       </head>
+       <body>
+         <slot />
+       </body>
+     </html>
+     ```
 
    - Option 2: Manually add the `meta` tags to your Astro layout.
 
