@@ -5,6 +5,7 @@ import * as fs from "fs";
 import type { AstroIntegrationLogger } from "astro";
 import { extract } from "./extract.js";
 import { getFilePath } from "./util.js";
+import { fileURLToPath } from 'url';
 
 export async function buildDoneHook({
   logger,
@@ -35,7 +36,7 @@ interface HandlePageInput {
 }
 
 async function handlePage({ page, options, render, dir, logger }: HandlePageInput) {
-  const htmlFile = getFilePath({ dir: dir.pathname, page: page.pathname });
+  const htmlFile = getFilePath({ dir: fileURLToPath(dir), page: page.pathname });
   const html = fs.readFileSync(htmlFile).toString();
   const pageDetails = extract(html);
 
