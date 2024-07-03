@@ -10,8 +10,8 @@ export function getFilePath({ dir, page }: { dir: string; page: string }) {
   if (!fs.existsSync(`${dir}${page}`)) {
     target = path.join(dir, page + ".html")
   }
-
-  return trim(target);
+  
+  return target;
 }
 
 export function getImagePath({ url, site }: { url: URL; site: URL | undefined }): string {
@@ -44,12 +44,4 @@ export function getImagePath({ url, site }: { url: URL; site: URL | undefined })
   target = site.toString() + target;
 
   return target;
-}
-
-function trim(input: string): string {
-  // remove local filesystem pathname
-  input = input.replace(process.cwd(), "");
-  input = input.replace("/dist/", "dist/");
-
-  return input;
 }
