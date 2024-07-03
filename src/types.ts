@@ -9,11 +9,13 @@ export interface IntegrationInput {
 export type DefaultIntegrationOptions = Omit<Omit<SatoriOptions, "width">, "height"> & {
   width?: number;
   height?: number;
+  disableImagePathCheck?: boolean;
 };
 
 export type IntegrationOptions = DefaultIntegrationOptions & {
   width: number;
   height: number;
+  disableImagePathCheck: boolean;
 };
 
 /** This is the page data passed in by Astro */

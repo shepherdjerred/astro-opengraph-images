@@ -5,6 +5,7 @@ import { buildDoneHook } from "./hook.js";
 const defaults = {
   width: 1200,
   height: 630,
+  disableImagePathCheck: false,
 };
 
 export function astroOpenGraphImages({ options, render }: IntegrationInput): AstroIntegration {

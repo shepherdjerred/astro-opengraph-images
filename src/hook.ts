@@ -64,7 +64,7 @@ async function handlePage({ page, options, render, dir, logger }: HandlePageInpu
   imageUrl = imageUrl.slice(1);
 
   // check that the og:image property matches the sitePath
-  if (imageUrl !== pngFile) {
+  if (!options.disableImagePathCheck && imageUrl !== pngFile) {
     throw new Error(
       `The og:image property in ${htmlFile} (${imageUrl}) does not match the generated image (${pngFile}).`,
     );
