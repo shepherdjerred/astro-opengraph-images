@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.6.6...v1.7.0) (2024-07-03)
+
+
+### Features
+
+* add windows support & proper path handling ([fe6c5f4](https://github.com/shepherdjerred/astro-opengraph-images/commit/fe6c5f4abdf47c354afce4b2513588a759cbd8d7))
+
 ## [1.6.6](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.6.5...v1.6.6) (2024-07-02)
 
 
