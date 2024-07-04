@@ -7,8 +7,8 @@ import path from 'path';
 // Check if `page.pathname` is a directory on disk
 export function getFilePath({ dir, page }: { dir: string; page: string }) {
   let target: string = path.join(dir, page, "index.html");
-  if (!fs.existsSync(`${dir}${page}`)) {
-    target = path.join(dir, page + ".html")
+  if (!fs.existsSync(target)) {
+    target = path.join(dir, page.slice(0, -1) + ".html")
   }
   
   return target;
