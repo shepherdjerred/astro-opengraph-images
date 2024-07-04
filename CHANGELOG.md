@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.1](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.7.0...v1.7.1) (2024-07-04)
+
+
+### Bug Fixes
+
+* relative paths being handled as absolute ones ([bfd1174](https://github.com/shepherdjerred/astro-opengraph-images/commit/bfd117431a793e61926aed08e2f9474a87733918))
+
 ## [1.7.0](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.6.6...v1.7.0) (2024-07-03)
 
 
