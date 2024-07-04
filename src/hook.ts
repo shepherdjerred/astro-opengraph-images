@@ -6,6 +6,7 @@ import type { AstroIntegrationLogger } from "astro";
 import { extract } from "./extract.js";
 import { getFilePath } from "./util.js";
 import { fileURLToPath } from 'url';
+import path from "path";
 
 export async function buildDoneHook({
   logger,
@@ -56,7 +57,8 @@ async function handlePage({ page, options, render, dir, logger }: HandlePageInpu
 
   // remove leading dist/ from the path
   fs.writeFileSync(pngFile, resvg.render().asPng());
-  pngFile = pngFile.replace("dist/", "");
+  pngFile = pngFile.replace(path.join(process.cwd(), "dist"), "").replace(/\\/g, "/");
+  if(pngFile.startsWith("/")) pngFile = pngFile.slice(1);
 
   // convert the image path to a URL
   let imageUrl = new URL(pageDetails.image).pathname;
