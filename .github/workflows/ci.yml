@@ -15,4 +15,5 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run build
+      - run: npm test
       - run: cd example && npm ci && npm run build

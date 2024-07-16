@@ -60,6 +60,12 @@ To better illustrate these steps, I've created a [video](https://www.loom.com/sh
      });
      ```
 
+1. Install React. React is used by the presets, and can be used to easily author custom images. Note that React is only used for generating the images and will not be shipped to clients.
+
+   ```bash
+   npm i -D react
+   ```
+
 1. Install the fonts you want to use. Fonts must be explicitly declared to be used for images. System fonts are _not_ available. For this quick start guide, we'll install the [Roboto](https://fontsource.org/fonts/roboto) font:
 
    ```bash

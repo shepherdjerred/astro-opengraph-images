@@ -1,4 +1,3 @@
-import React from "react";
 import type { RenderFunctionInput } from "../types.js";
 
 // from https://fullstackheroes.com/resources/vercel-og-templates/podcast/

@@ -1,4 +1,3 @@
-import React from "react";
 import type { RenderFunctionInput } from "../types.js";
 
 export async function tailwind({ title, description }: RenderFunctionInput): Promise<React.ReactNode> {

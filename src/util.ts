@@ -1,16 +1,18 @@
 import * as fs from "fs";
-import path from 'path';
+import path from "path";
 
 // some files, e.g. index or 404 pages, are served without a folder
 // other files, e.g. blog posts, are served from a folder
 // I don't fully understand how Astro decides this, so:
-// Check if `page.pathname` is a directory on disk
 export function getFilePath({ dir, page }: { dir: string; page: string }) {
   let target: string = path.join(dir, page, "index.html");
+
+  console.log(target);
+
   if (!fs.existsSync(target)) {
-    target = path.join(dir, page.slice(0, -1) + ".html")
+    target = path.join(dir, page.slice(0, -1) + ".html");
   }
-  
+
   return target;
 }
 
