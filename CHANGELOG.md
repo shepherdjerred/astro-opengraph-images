@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.7.2...v1.8.0) (2024-07-16)
+
+
+### Features
+
+* don't require react ([b724b15](https://github.com/shepherdjerred/astro-opengraph-images/commit/b724b158f29e88318dc0467b497b78367823fefa))
+
 ## [1.7.2](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.7.1...v1.7.2) (2024-07-16)
 
 
