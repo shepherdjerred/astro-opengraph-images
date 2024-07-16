@@ -36,6 +36,7 @@
   "dependencies": {
     "@resvg/resvg-js": "^2.6.2",
     "jsdom": "^24.1.0",
+    "react": "^18.3.1",
     "satori": "^0.10.14"
   },
   "peerDependencies": {
@@ -59,7 +60,6 @@
     "install": "^0.13.0",
     "lint-staged": "^15.2.7",
     "prettier": "^3.3.3",
-    "react": "^18.3.1",
     "typescript": "^5.5.3",
     "typescript-eslint": "^7.16.0",
     "vitest": "^2.0.2"
