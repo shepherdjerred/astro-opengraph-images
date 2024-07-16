@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.7.2](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.7.1...v1.7.2) (2024-07-16)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @astrojs/check to ^0.8.0 ([9df8d2c](https://github.com/shepherdjerred/astro-opengraph-images/commit/9df8d2c3037c55c15828b953bd6d0cfb2495c12e))
+* **deps:** update dependency satori to v0.10.14 ([cea07df](https://github.com/shepherdjerred/astro-opengraph-images/commit/cea07df65264c1ff3b5099618ed8f2b3cc4ab7ad))
+
 ## [1.7.1](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.7.0...v1.7.1) (2024-07-04)
 
 
