@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.11.0](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.10.0...v1.11.0) (2024-08-04)
+
+
+### Features
+
+* add verbose option ([0a640ae](https://github.com/shepherdjerred/astro-opengraph-images/commit/0a640aec1457d275c9de0cefafb7bb8460ee5017))
+
 ## [1.10.0](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.9.0...v1.10.0) (2024-08-04)
 
 
