@@ -220,6 +220,8 @@ If you're using this project, [open a PR](https://github.com/shepherdjerred/astr
 
 You can create your own custom images with a render function. Take a look at how [a preset](https://github.com/shepherdjerred/astro-opengraph-images/blob/main/src/presets/blackAndWhite.tsx) works.
 
+Renderers have access to the page's DOM using [jsdom](https://github.com/jsdom/jsdom). You can use this to render your Open Graph image using any of the content from the associated HTML page. An example of this is shown in the [custom property preset](https://github.com/shepherdjerred/astro-opengraph-images/blob/main/src/presets/customProperty.tsx) which shows a preview of the page's body text in the Open Graph image.
+
 This library uses [Satori](https://github.com/vercel/satori) to convert React components to SVG. The SVG is then converted to a PNG using [resvg-js](https://github.com/yisibl/resvg-js).
 
 > [!TIP]
