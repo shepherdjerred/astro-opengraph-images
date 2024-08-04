@@ -1,12 +1,13 @@
 import { Resvg } from "@resvg/resvg-js";
 import satori from "satori";
 import type { AstroBuildDoneHookInput, IntegrationOptions, Page, RenderFunction } from "./types.js";
-import * as fs from "fs";
+import * as fs from "fs/promises";
 import type { AstroIntegrationLogger } from "astro";
-import { extract } from "./extract.js";
+import { extract, sanitizeHtml } from "./extract.js";
 import { getFilePath } from "./util.js";
 import { fileURLToPath } from "url";
 import * as path from "path";
+import * as jsdom from "jsdom";
 
 export async function buildDoneHook({
   logger,
@@ -38,10 +39,12 @@ interface HandlePageInput {
 
 async function handlePage({ page, options, render, dir, logger }: HandlePageInput) {
   const htmlFile = getFilePath({ dir: fileURLToPath(dir), page: page.pathname });
-  const html = fs.readFileSync(htmlFile).toString();
-  const pageDetails = extract(html);
+  const html = (await fs.readFile(htmlFile)).toString();
+  const document = new jsdom.JSDOM(sanitizeHtml(html)).window.document;
 
-  const reactNode = await render({ ...page, ...pageDetails, dir: dir });
+  const pageDetails = extract(document);
+
+  const reactNode = await render({ ...page, ...pageDetails, dir, document });
   const svg = await satori(reactNode, options);
   const resvg = new Resvg(svg, {
     font: {
@@ -56,7 +59,7 @@ async function handlePage({ page, options, render, dir, logger }: HandlePageInpu
   let pngFile = htmlFile.replace(/\.html$/, ".png");
 
   // remove leading dist/ from the path
-  fs.writeFileSync(pngFile, resvg.render().asPng());
+  await fs.writeFile(pngFile, resvg.render().asPng());
   pngFile = pngFile.replace(path.join(process.cwd(), "dist"), "").replace(/\\/g, "/");
   if (pngFile.startsWith("/")) pngFile = pngFile.slice(1);
 

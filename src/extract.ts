@@ -1,5 +1,4 @@
 import type { PageDetails } from "./types.js";
-import * as jsdom from "jsdom";
 
 // Astro CSS parsing fails: Error: Could not parse CSS stylesheet
 // Remove CSS from the HTML
@@ -10,14 +9,12 @@ export function sanitizeHtml(html: string): string {
     .replace(/<script([\S\s]*?)>([\S\s]*?)<\/script>/gim, "");
 }
 
-export function extract(html: string): PageDetails {
-  const htmlDoc = new jsdom.JSDOM(sanitizeHtml(html)).window.document;
-
-  const title = htmlDoc.querySelector("meta[property='og:title']")?.getAttribute("content");
-  const description = htmlDoc.querySelector("meta[property='og:description']")?.getAttribute("content");
-  const url = htmlDoc.querySelector("meta[property='og:url']")?.getAttribute("content");
-  const type = htmlDoc.querySelector("meta[property='og:type']")?.getAttribute("content");
-  const image = htmlDoc.querySelector("meta[property='og:image']")?.getAttribute("content");
+export function extract(document: Document): PageDetails {
+  const title = document.querySelector("meta[property='og:title']")?.getAttribute("content");
+  const description = document.querySelector("meta[property='og:description']")?.getAttribute("content");
+  const url = document.querySelector("meta[property='og:url']")?.getAttribute("content");
+  const type = document.querySelector("meta[property='og:type']")?.getAttribute("content");
+  const image = document.querySelector("meta[property='og:image']")?.getAttribute("content");
 
   const errors = [];
   if (!title) {

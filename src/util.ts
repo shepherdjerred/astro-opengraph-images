@@ -7,8 +7,6 @@ import path from "path";
 export function getFilePath({ dir, page }: { dir: string; page: string }) {
   let target: string = path.join(dir, page, "index.html");
 
-  console.log(target);
-
   if (!fs.existsSync(target)) {
     target = path.join(dir, page.slice(0, -1) + ".html");
   }

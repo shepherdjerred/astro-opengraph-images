@@ -1,19 +1,10 @@
-import { fileURLToPath } from "url";
-import { sanitizeHtml } from "../extract.js";
 import type { RenderFunctionInput } from "../types.js";
-import { getFilePath } from "../util.js";
-import * as jsdom from "jsdom";
-import * as fs from "fs";
 
 // This preset demonstrates how to extract arbitrary content from an HTML file
 // and render it in an opengraph image.
-export async function customProperty({ title, pathname, dir }: RenderFunctionInput): Promise<React.ReactNode> {
-  const htmlFile = getFilePath({ dir: fileURLToPath(dir), page: pathname });
-  const html = fs.readFileSync(htmlFile).toString();
-  const htmlDoc = new jsdom.JSDOM(sanitizeHtml(html)).window.document;
-
+export async function customProperty({ title, document }: RenderFunctionInput): Promise<React.ReactNode> {
   // extract the body
-  const body = htmlDoc.querySelector("body")?.textContent ?? "";
+  const body = document.querySelector("body")?.textContent ?? "";
   // truncate the body to 50 characters, add ellipsis if truncated
   const bodyTruncated = body.substring(0, 50) + (body.length > 50 ? "..." : "");
 

@@ -36,6 +36,7 @@ export interface AstroBuildDoneHookInput {
 export type RenderFunctionInput = {
   pathname: string;
   dir: URL;
+  document: Document;
 } & PageDetails;
 
 /** A function that renders some page input to React */

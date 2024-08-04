@@ -3,18 +3,30 @@ import satori, { type SatoriOptions } from "satori";
 import { presets } from "./index.js";
 import * as fs from "fs/promises";
 import type { RenderFunctionInput } from "../types.js";
+import { getFilePath } from "../util.js";
+import * as jsdom from "jsdom";
+import { sanitizeHtml } from "../extract.js";
+import { fileURLToPath } from "url";
 
 // Updates the examples for the README
 // Run with `npx tsx src/presets/renderExamples.ts`
 async function renderExamples() {
+  const pathname = "dist/index/";
+  const dir = new URL("../../example", import.meta.url);
+
+  const htmlFile = getFilePath({ dir: fileURLToPath(dir), page: pathname });
+  const html = (await fs.readFile(htmlFile)).toString();
+  const document = new jsdom.JSDOM(sanitizeHtml(html)).window.document;
+
   const page: RenderFunctionInput = {
     title: "3D Graphics with OpenGL",
     description: "An introduction to 3D graphics rendering and OpenGL.",
     url: "https://example.com/3d-graphics",
     type: "article",
     image: "https://example.com/3d-graphics.png",
-    pathname: "dist/index/",
-    dir: new URL("../../example", import.meta.url),
+    pathname: pathname,
+    dir,
+    document,
   };
 
   const options: SatoriOptions = {
