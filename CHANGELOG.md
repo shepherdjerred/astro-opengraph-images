@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.11.1](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.11.0...v1.11.1) (2024-08-04)
+
+
+### Bug Fixes
+
+* use correct type for verbose ([8876098](https://github.com/shepherdjerred/astro-opengraph-images/commit/88760989def15079c5ab2aefac7ce8e7fb3ad0ad))
+
 ## [1.11.0](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.10.0...v1.11.0) (2024-08-04)
 
 
