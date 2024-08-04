@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.0](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.9.0...v1.10.0) (2024-08-04)
+
+
+### Features
+
+* add document to render input ([9b41de8](https://github.com/shepherdjerred/astro-opengraph-images/commit/9b41de85c6bf42bee585c2a52bc2363e75f85763))
+
 ## [1.9.0](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.8.2...v1.9.0) (2024-08-04)
 
 
