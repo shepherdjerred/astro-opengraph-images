@@ -2,21 +2,28 @@ import type { AstroIntegrationLogger, RouteData } from "astro";
 import type { ReactNode } from "react";
 
 export interface IntegrationInput {
-  options: DefaultIntegrationOptions;
+  options: PartialIntegrationOptions;
   render: RenderFunction;
 }
 
-export type DefaultIntegrationOptions = Omit<Omit<SatoriOptions, "width">, "height"> & {
-  width?: number;
-  height?: number;
-  verbose: boolean;
-};
-
-export type IntegrationOptions = DefaultIntegrationOptions & {
+/** When applied to PartialIntegrationOptions this type equals IntegrationOptions */
+export interface IntegrationDefaults {
   width: number;
   height: number;
   verbose: boolean;
-};
+}
+
+/**
+ * IntegrationOptions with some optional properties. This is what we expose to the user. It allows us to
+ * merge the defaults with the user's options and ensure that all required properties are present.
+ */
+export type PartialIntegrationOptions = Omit<Omit<SatoriOptions, "width">, "height"> & Partial<IntegrationDefaults>;
+
+/**
+ * The options that we use internally. This ensures that all options are configured, either with something
+ * the user provided or with a default value.
+ */
+export type IntegrationOptions = PartialIntegrationOptions & IntegrationDefaults;
 
 /** This is the page data passed in by Astro */
 export interface Page {
