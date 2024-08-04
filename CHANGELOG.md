@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.9.0](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.8.2...v1.9.0) (2024-08-04)
+
+
+### Features
+
+* add custom property preset ([9ebff27](https://github.com/shepherdjerred/astro-opengraph-images/commit/9ebff2708d951b27f125cc7d8a0a44276446765d))
+* update to eslint 9 ([d19f8fc](https://github.com/shepherdjerred/astro-opengraph-images/commit/d19f8fcd5670088a0563af41fd533a3f28af212f))
+
+
+### Bug Fixes
+
+* **deps:** update dependency astro-opengraph-images to v1.8.2 ([f20bf7a](https://github.com/shepherdjerred/astro-opengraph-images/commit/f20bf7a6497aae31c8ab1546bdc5aa10c946eef5))
+
 ## [1.8.2](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.8.1...v1.8.2) (2024-07-28)
 
 
