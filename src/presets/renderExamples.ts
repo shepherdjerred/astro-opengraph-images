@@ -13,7 +13,8 @@ async function renderExamples() {
     url: "https://example.com/3d-graphics",
     type: "article",
     image: "https://example.com/3d-graphics.png",
-    pathname: "empty",
+    pathname: "dist/index/",
+    dir: new URL("../../example", import.meta.url),
   };
 
   const options: SatoriOptions = {

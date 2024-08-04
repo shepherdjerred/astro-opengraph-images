@@ -287,6 +287,22 @@ export default defineConfig({
 
 ![](assets/presets/brandedLogo.png)
 
+### `customProperty`
+
+```diff
+import opengraphImages, { presets } from "astro-opengraph-images";
+
+export default defineConfig({
+  integrations: [
+    opengraphImages({
++      render: presets.customProperty,
+    }),
+  ],
+});
+```
+
+![](assets/presets/customProperty.png)
+
 ### `gradients`
 
 ```diff

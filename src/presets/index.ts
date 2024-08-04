@@ -1,6 +1,7 @@
 import { backgroundImage } from "./backgroundImage.js";
 import { blackAndWhite } from "./blackAndWhite.js";
 import { brandedLogo } from "./brandedLogo.js";
+import { customProperty } from "./customProperty.js";
 import { gradients } from "./gradients.js";
 import { podcast } from "./podcast.js";
 import { rauchg } from "./rauchg.js";
@@ -20,4 +21,5 @@ export const presets = {
   podcast,
   simpleBlog,
   waveSvg,
+  customProperty,
 };

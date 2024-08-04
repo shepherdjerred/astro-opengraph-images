@@ -41,7 +41,7 @@ async function handlePage({ page, options, render, dir, logger }: HandlePageInpu
   const html = fs.readFileSync(htmlFile).toString();
   const pageDetails = extract(html);
 
-  const reactNode = await render({ ...page, ...pageDetails });
+  const reactNode = await render({ ...page, ...pageDetails, dir: dir });
   const svg = await satori(reactNode, options);
   const resvg = new Resvg(svg, {
     font: {
