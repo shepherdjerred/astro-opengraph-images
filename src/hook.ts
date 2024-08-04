@@ -75,5 +75,7 @@ async function handlePage({ page, options, render, dir, logger }: HandlePageInpu
     );
   }
 
-  logger.info(`Generated ${pngFile} for ${htmlFile}.`);
+  if (options.verbose) {
+    logger.info(`Generated ${pngFile} for ${htmlFile}.`);
+  }
 }
