@@ -16,4 +16,7 @@ jobs:
       - run: npm run lint
       - run: npm run build
       - run: npm test
-      - run: cd example && npm ci && npm run build
+      - run: |
+          for dir in examples/*/; do
+            (cd "$dir" && npm ci && npm run build)
+          done

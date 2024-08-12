@@ -16,7 +16,7 @@ export default defineConfig({
           },
         ],
       },
-      render: presets.customProperty,
+      render: presets.blackAndWhite,
     }),
   ],
 });
