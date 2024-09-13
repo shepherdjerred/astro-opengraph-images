@@ -43,24 +43,24 @@
     "tw-to-css": "^0.0.12"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.4.1",
-    "@commitlint/config-conventional": "^19.4.1",
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
     "@eslint/js": "^9.10.0",
-    "@fontsource/roboto": "^5.0.15",
+    "@fontsource/roboto": "^5.1.0",
     "@tsconfig/node20": "^20.1.4",
     "@tsconfig/strictest": "^2.0.5",
     "@types/jsdom": "^21.1.7",
     "@types/node": "^22.5.4",
     "@types/react": "^18.3.5",
-    "astro": "^4.15.4",
+    "astro": "^4.15.5",
     "eslint": "^9.10.0",
-    "husky": "^9.1.5",
+    "husky": "^9.1.6",
     "install": "^0.13.0",
     "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
     "typescript": "^5.6.2",
     "typescript-eslint": "^8.5.0",
-    "vitest": "^2.0.5"
+    "vitest": "^2.1.1"
   },
   "lint-staged": {
     "*.{ts,tsx}": "eslint --cache --fix",
