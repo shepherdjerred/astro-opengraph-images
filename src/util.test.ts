@@ -1,7 +1,7 @@
 import { expect, test } from "vitest";
 import { getFilePath } from "./util.js";
 import { tmpdir } from "os";
-import { join } from "path";
+import { join, normalize } from "path";
 import { mkdir, mkdtemp, writeFile } from "fs/promises";
 
 test("getFilePath index", async () => {
@@ -18,7 +18,7 @@ test("getFilePath index", async () => {
   // change the current working directory back to the original
   process.chdir(__dirname);
 
-  expect(result).toBe("index.html");
+  expect(normalize(result)).toBe(normalize("index.html"));
 });
 
 test("getFilePath 404", async () => {
@@ -35,7 +35,7 @@ test("getFilePath 404", async () => {
   // change the current working directory back to the original
   process.chdir(__dirname);
 
-  expect(result).toBe("404.html");
+  expect(normalize(result)).toBe(normalize("404.html"));
 });
 
 test("getFilePath blog", async () => {
@@ -53,7 +53,7 @@ test("getFilePath blog", async () => {
   // change the current working directory back to the original
   process.chdir(__dirname);
 
-  expect(result).toBe("blog/index.html");
+  expect(normalize(result)).toBe(normalize("blog/index.html"));
 });
 
 // https://sdorra.dev/posts/2024-02-12-vitest-tmpdir
