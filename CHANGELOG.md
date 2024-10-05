@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.11.4](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.11.3...v1.11.4) (2024-10-05)
+
+
+### Bug Fixes
+
+* **deps:** update dependency jsdom to v25.0.1 ([4b4f12c](https://github.com/shepherdjerred/astro-opengraph-images/commit/4b4f12cdaf93862038413fdbf20b80241aeeb1d7))
+* fixed test cases on Windows ([9183350](https://github.com/shepherdjerred/astro-opengraph-images/commit/9183350f751f9951620e05050dc3882e28ff1580))
+
 ## [1.11.3](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.11.2...v1.11.3) (2024-08-25)
 
 
