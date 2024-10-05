@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.11.5](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.11.4...v1.11.5) (2024-10-05)
+
+
+### Bug Fixes
+
+* update package-lock of example ([5bab5d5](https://github.com/shepherdjerred/astro-opengraph-images/commit/5bab5d5b253931af2ee4e73e3fabbc4ea318cbb2))
+
 ## [1.11.4](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.11.3...v1.11.4) (2024-10-05)
 
 
