@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.11.7](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.11.6...v1.11.7) (2024-11-10)
+
+
+### Bug Fixes
+
+* **deps:** update dependency satori to v0.11.3 ([4788d22](https://github.com/shepherdjerred/astro-opengraph-images/commit/4788d22365000761e3849bcd9bc39771421c0937))
+
 ## [1.11.6](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.11.5...v1.11.6) (2024-10-06)
 
 

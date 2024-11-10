@@ -16,7 +16,7 @@
     "url": "https://github.com/shepherdjerred/astro-opengraph-images/issues"
   },
   "type": "module",
-  "version": "1.11.6",
+  "version": "1.11.7",
   "scripts": {
     "prepare": "husky",
     "lint": "eslint src --cache",
