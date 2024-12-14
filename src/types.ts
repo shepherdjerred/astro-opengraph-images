@@ -1,4 +1,4 @@
-import type { AstroIntegrationLogger, RouteData } from "astro";
+import type { BaseIntegrationHooks } from "astro";
 import type { ReactNode } from "react";
 
 export interface IntegrationInput {
@@ -31,15 +31,7 @@ export interface Page {
 }
 
 /** The input Astro passes to the build done hook */
-export interface AstroBuildDoneHookInput {
-  logger: AstroIntegrationLogger;
-  pages: {
-    pathname: string;
-  }[];
-  dir: URL;
-  routes: RouteData[];
-  cacheManifest: boolean;
-}
+export type AstroBuildDoneHookInput = Parameters<BaseIntegrationHooks["astro:build:done"]>[0];
 
 /** The input arguments to a `RenderFunction` */
 export type RenderFunctionInput = {

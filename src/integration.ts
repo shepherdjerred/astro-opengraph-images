@@ -1,5 +1,5 @@
 import type { AstroIntegration } from "astro";
-import type { IntegrationDefaults, IntegrationInput, IntegrationOptions } from "./types.js";
+import type { AstroBuildDoneHookInput, IntegrationDefaults, IntegrationInput, IntegrationOptions } from "./types.js";
 import { buildDoneHook } from "./hook.js";
 
 const defaults: IntegrationDefaults = {
@@ -14,8 +14,8 @@ export function astroOpenGraphImages({ options, render }: IntegrationInput): Ast
   return {
     name: "astro-opengraph-images",
     hooks: {
-      "astro:build:done": async (entry) => {
-        await buildDoneHook({
+      "astro:build:done": async (entry: AstroBuildDoneHookInput) => {
+        return buildDoneHook({
           ...entry,
           options: optionsWithDefaults,
           render,

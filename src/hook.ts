@@ -20,13 +20,8 @@ export async function buildDoneHook({
   render: RenderFunction;
 }) {
   logger.info("Generating Open Graph images");
-  for (const page of pages) {
-    try {
-      await handlePage({ page, options, render, dir, logger });
-    } catch (e) {
-      logger.error(e as string);
-    }
-  }
+  const promises = pages.map((page) => handlePage({ page, options, render, dir, logger }));
+  await Promise.all(promises);
 }
 
 interface HandlePageInput {

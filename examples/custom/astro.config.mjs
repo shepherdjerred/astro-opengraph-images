@@ -1,5 +1,5 @@
 import { defineConfig } from "astro/config";
-import opengraphImages, { presets } from "astro-opengraph-images";
+import opengraphImages from "astro-opengraph-images";
 import { customOgMediaLayout } from "./src/customRenderer";
 
 // https://astro.build/config
