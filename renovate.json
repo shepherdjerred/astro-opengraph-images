@@ -6,7 +6,7 @@
     "enabled": true
   },
   "schedule": ["after 3am on Sunday"],
-  "assignees": ["shepherdjerred"],
+  "reviewers": ["shepherdjerred"],
   "packageRules": [
     {
       "commitMessageTopic": "Node.js",
