@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.12.0](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.11.7...v1.12.0) (2024-12-16)
+
+
+### Features
+
+* use Earthly for CI ([72c0d6b](https://github.com/shepherdjerred/astro-opengraph-images/commit/72c0d6bd95293be919b640a2b09c799ca2d8a2ea))
+
+
+### Bug Fixes
+
+* reviewer ([fdb470d](https://github.com/shepherdjerred/astro-opengraph-images/commit/fdb470d9befdea1af56d4d9d59cafe4467933d87))
+
 ## [1.11.7](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.11.6...v1.11.7) (2024-11-10)
 
 
