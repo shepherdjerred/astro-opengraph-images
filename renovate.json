@@ -10,10 +10,14 @@
   "packageRules": [
     {
       "commitMessageTopic": "Node.js",
-      "excludePackageNames": ["calico/node", "docker.io/calico/node", "kindest/node"],
       "matchDatasources": ["docker"],
       "matchDepNames": ["node"],
-      "matchPackagePatterns": ["/node$"]
+      "matchPackageNames": [
+        "!calico/node",
+        "!docker.io/calico/node",
+        "!kindest/node",
+        "//node$/"
+      ]
     },
     {
       "matchManagers": ["npm"],
