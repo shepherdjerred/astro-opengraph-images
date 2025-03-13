@@ -1,16 +1,13 @@
 import type { RenderFunctionInput } from "../types.js";
+const { twj } = await import("tw-to-css");
 
 // from https://fullstackheroes.com/resources/vercel-og-templates/branded-logo/
 export async function brandedLogo({ title }: RenderFunctionInput): Promise<React.ReactNode> {
-  const twj = (await import("tw-to-css")).twj;
-
-  return (
+  return Promise.resolve(
     <div
       style={{
         ...twj("h-full w-full flex items-start justify-start"),
-        ...{
-          backgroundImage: "linear-gradient(to right, #24243e, #302b63, #0f0c29)",
-        },
+        ...{ backgroundImage: "linear-gradient(to right, #24243e, #302b63, #0f0c29)" },
       }}
     >
       <div style={twj("flex items-start justify-start h-full")}>
@@ -76,6 +73,6 @@ export async function brandedLogo({ title }: RenderFunctionInput): Promise<React
           <h1 style={twj("text-[60px] text-white font-bold text-left")}>{title}</h1>
         </div>
       </div>
-    </div>
+    </div>,
   );
 }

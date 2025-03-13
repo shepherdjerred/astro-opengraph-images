@@ -11,11 +11,11 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@fontsource/roboto": "^5.1.0",
-    "astro": "^5.0.5",
+    "@fontsource/roboto": "^5.2.5",
+    "astro": "^5.4.3",
     "astro-opengraph-images": "../../",
     "astro-seo": "^0.8.4",
     "react": "^19.0.0",
-    "typescript": "^5.7.2"
+    "typescript": "^5.8.2"
   }
 }
