@@ -12,7 +12,7 @@ import { fileURLToPath } from "url";
 // Run with `npx tsx src/presets/renderExamples.ts`
 async function renderExamples() {
   const pathname = "dist/index/";
-  const dir = new URL("../../example", import.meta.url);
+  const dir = new URL("../../examples/preset", import.meta.url);
 
   const htmlFile = getFilePath({ dir: fileURLToPath(dir), page: pathname });
   const html = (await fs.readFile(htmlFile)).toString();
@@ -45,15 +45,7 @@ async function renderExamples() {
   const promises = Object.entries(presets).map(async ([name, preset]) => {
     const node = await preset(page);
     const svg = await satori(node, options);
-    const resvg = new Resvg(svg, {
-      font: {
-        loadSystemFonts: false,
-      },
-      fitTo: {
-        mode: "width",
-        value: options.width,
-      },
-    });
+    const resvg = new Resvg(svg, { font: { loadSystemFonts: false }, fitTo: { mode: "width", value: options.width } });
     const target = `assets/presets/${name}.png`;
     await fs.writeFile(target, resvg.render().asPng());
     console.log(`Wrote ${target}`);
