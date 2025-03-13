@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.12.0](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.11.7...v1.12.0) (2025-03-13)
+
+
+### Features
+
+* use Earthly for CI ([72c0d6b](https://github.com/shepherdjerred/astro-opengraph-images/commit/72c0d6bd95293be919b640a2b09c799ca2d8a2ea))
+
+
+### Bug Fixes
+
+* **deps:** update dependency jsdom to v26 ([874f2d5](https://github.com/shepherdjerred/astro-opengraph-images/commit/874f2d5a8795b0fd990de3aafa556c03db054d3c))
+* **deps:** update npm ([4e3e51a](https://github.com/shepherdjerred/astro-opengraph-images/commit/4e3e51aad322c6901606c2a652ccbeb513cce16d))
+* lockfile ([8a7de4f](https://github.com/shepherdjerred/astro-opengraph-images/commit/8a7de4f9f681210746f1491ae285d84656e38656))
+* reviewer ([fdb470d](https://github.com/shepherdjerred/astro-opengraph-images/commit/fdb470d9befdea1af56d4d9d59cafe4467933d87))
+* tests ([f89e00c](https://github.com/shepherdjerred/astro-opengraph-images/commit/f89e00c3eda59d16930de5982c99e0aac5448b3f))
+
 ## [1.11.7](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.11.6...v1.11.7) (2024-11-10)
 
 
