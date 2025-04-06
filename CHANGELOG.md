@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.12.2](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.12.1...v1.12.2) (2025-04-06)
+
+
+### Bug Fixes
+
+* **deps:** update npm ([20adbbb](https://github.com/shepherdjerred/astro-opengraph-images/commit/20adbbb1f8253a5693e42b3fabfd33f4c4fe415c))
+
 ## [1.12.1](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.12.0...v1.12.1) (2025-03-13)
 
 
