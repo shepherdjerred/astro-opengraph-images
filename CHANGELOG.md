@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.12.2](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.12.1...v1.12.2) (2025-04-16)
+
+
+### Bug Fixes
+
+* **deps:** update dependency jsdom to v26.1.0 ([0f3737b](https://github.com/shepherdjerred/astro-opengraph-images/commit/0f3737b2764b38523cfbecc56061c76754fd6042))
+* **deps:** update npm ([20adbbb](https://github.com/shepherdjerred/astro-opengraph-images/commit/20adbbb1f8253a5693e42b3fabfd33f4c4fe415c))
+* **plugin:** correct outDir path handling in buildDoneHook ([0838ede](https://github.com/shepherdjerred/astro-opengraph-images/commit/0838ede01e1a62072726e7aef39053b0cf3018e4))
+
 ## [1.12.1](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.12.0...v1.12.1) (2025-03-13)
 
 
