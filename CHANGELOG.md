@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.12.3](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.12.2...v1.12.3) (2025-04-17)
+
+
+### Bug Fixes
+
+* use path.relative for og:image check, properly handle ntfs paths & add more comments ([d45c4cd](https://github.com/shepherdjerred/astro-opengraph-images/commit/d45c4cd0d1b9037829f64b806edd0e46e82813d3))
+
 ## [1.12.2](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.12.1...v1.12.2) (2025-04-16)
 
 
