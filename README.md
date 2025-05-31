@@ -79,6 +79,7 @@ To better illustrate these steps, I've created a [video](https://www.loom.com/sh
    ```diff
    -import opengraphImages from "astro-opengraph-images";
    +import opengraphImages, { presets } from "astro-opengraph-images";
+   +import * as fs from "fs"; // The fs module is required to load fonts
 
    export default defineConfig({
      integrations: [
@@ -215,6 +216,7 @@ There are example sites using this integration under [`examples/`](https://githu
 If you're using this project, [open a PR](https://github.com/shepherdjerred/astro-opengraph-images/compare) to add your site to this list.
 
 - [sjer.red](https://sjer.red) ([source](https://github.com/shepherdjerred/sjer.red))
+- [fortc.com](https://fortc.com) ([source](https://github.com/dfinster/fortc))
 
 ## Custom Renderers
 
