@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.13.0](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.12.3...v1.13.0) (2025-06-01)
+
+
+### Features
+
+* **docs:** add guide for loading local images with base64 encoding in custom renderers ([a48d338](https://github.com/shepherdjerred/astro-opengraph-images/commit/a48d33872ba3b328c8f742beaf09d1a59148f125))
+
+
+### Bug Fixes
+
+* **deps:** update npm ([9639719](https://github.com/shepherdjerred/astro-opengraph-images/commit/963971966ecfef257dbd99f3107ef5e1504e4f82))
+
 ## [1.12.3](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.12.2...v1.12.3) (2025-04-17)
 
 
