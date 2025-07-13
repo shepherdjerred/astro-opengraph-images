@@ -62,6 +62,41 @@ export class AstroOpengraphImages {
   }
 
   /**
+   * Test all examples (equivalent to the original test.all target)
+   */
+  @func()
+  async testAll(
+    @argument({ defaultPath: "." })
+    source: Directory,
+  ): Promise<string> {
+    const container = dag
+      .container()
+      .from("node:lts")
+      .withWorkdir("/workspace")
+      .withDirectory("/workspace", source)
+      .withExec(["npm", "ci"])
+      .withExec(["npm", "run", "build"]);
+
+    // Get list of example directories
+    const exampleDirs = await container
+      .withExec(["ls", "-1", "examples"])
+      .stdout();
+
+    const examples = exampleDirs.trim().split("\n").filter((dir: string) => dir.trim());
+    
+    // Test each example
+    for (const example of examples) {
+      await container
+        .withWorkdir(`/workspace/examples/${example}`)
+        .withExec(["npm", "ci"])
+        .withExec(["npm", "run", "build"])
+        .stdout();
+    }
+
+    return `All ${examples.length} examples tested successfully: ${examples.join(", ")}`;
+  }
+
+  /**
    * Run unit tests
    */
   @func()
@@ -103,8 +138,13 @@ export class AstroOpengraphImages {
     // Run tests
     await container.withExec(["npm", "run", "test"]).stdout();
 
-    // Test examples
-    const examples = ["custom", "preset"];
+    // Test all examples dynamically
+    const exampleDirs = await container
+      .withExec(["ls", "-1", "examples"])
+      .stdout();
+
+    const examples = exampleDirs.trim().split("\n").filter((dir: string) => dir.trim());
+
     for (const example of examples) {
       await container
         .withWorkdir(`/workspace/examples/${example}`)
@@ -113,6 +153,6 @@ export class AstroOpengraphImages {
         .stdout();
     }
 
-    return "CI pipeline completed successfully";
+    return `CI pipeline completed successfully. Tested ${examples.length} examples: ${examples.join(", ")}`;
   }
 }
