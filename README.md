@@ -216,7 +216,6 @@ There are example sites using this integration under [`examples/`](https://githu
 If you're using this project, [open a PR](https://github.com/shepherdjerred/astro-opengraph-images/compare) to add your site to this list.
 
 - [sjer.red](https://sjer.red) ([source](https://github.com/shepherdjerred/sjer.red))
-- [fortc.com](https://fortc.com) ([source](https://github.com/dfinster/fortc))
 
 ## Custom Renderers
 
