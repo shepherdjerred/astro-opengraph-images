@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.13.2](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.13.1...v1.13.2) (2025-08-09)
+
+
+### Bug Fixes
+
+* Remove fortc.com ([51db246](https://github.com/shepherdjerred/astro-opengraph-images/commit/51db24618dd8676c6922898067b3344e56e1650f))
+
 ## [1.13.1](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.13.0...v1.13.1) (2025-06-15)
 
 
