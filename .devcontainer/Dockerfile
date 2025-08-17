@@ -12,7 +12,7 @@ RUN echo 'eval "$(mise activate bash)"' >> ~/.bashrc
 
 RUN mise use -g bun@latest
 RUN mise use -g node@lts
-RUN mise use -g python@latest
+RUN mise use -g python@3.14
 RUN mise install
 RUN mise reshim
 
