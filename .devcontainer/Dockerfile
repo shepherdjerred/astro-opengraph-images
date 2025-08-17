@@ -10,6 +10,7 @@ RUN apt install -y mise
 RUN echo 'eval "$(mise activate bash --shims)"' >> ~/.bash_profile
 RUN echo 'eval "$(mise activate bash)"' >> ~/.bashrc
 
+RUN mise settings set python.compile false
 RUN mise use -g bun@latest
 RUN mise use -g node@lts
 RUN mise use -g python@3.13
