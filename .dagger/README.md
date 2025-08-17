@@ -1,6 +1,6 @@
-# Scout for LoL - Dagger Module
+# Astro Open Graph Images - Dagger Module
 
-This is the Dagger module for Scout for LoL project.
+This is the Dagger module for Astro Open Graph Images project.
 
 ## Usage
 

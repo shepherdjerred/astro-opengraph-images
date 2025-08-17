@@ -48,13 +48,17 @@ export class AstroOpengraphImages {
     @argument()
     example: string,
   ): Promise<string> {
-    return await dag
+    // First build the main project
+    const builtContainer = dag
       .container()
       .from("node:lts")
       .withWorkdir("/workspace")
       .withDirectory("/workspace", source)
       .withExec(["npm", "ci"])
-      .withExec(["npm", "run", "build"])
+      .withExec(["npm", "run", "build"]);
+
+    // Then test the example using the built container
+    return await builtContainer
       .withWorkdir(`/workspace/examples/${example}`)
       .withExec(["npm", "ci"])
       .withExec(["npm", "run", "build"])
@@ -87,7 +91,7 @@ export class AstroOpengraphImages {
     @argument({ defaultPath: "." })
     source: Directory,
   ): Promise<string> {
-    const container = dag
+    const baseContainer = dag
       .container()
       .from("node:lts")
       .withWorkdir("/workspace")
@@ -95,18 +99,19 @@ export class AstroOpengraphImages {
       .withExec(["npm", "ci"]);
 
     // Run lint
-    await container.withExec(["npm", "run", "lint"]).stdout();
+    await baseContainer.withExec(["npm", "run", "lint"]).stdout();
 
-    // Run build
-    await container.withExec(["npm", "run", "build"]).stdout();
+    // Run build and keep the built container
+    const builtContainer = baseContainer.withExec(["npm", "run", "build"]);
+    await builtContainer.stdout();
 
     // Run tests
-    await container.withExec(["npm", "run", "test"]).stdout();
+    await builtContainer.withExec(["npm", "run", "test"]).stdout();
 
-    // Test examples
+    // Test examples - use the built container that has dist/ directory
     const examples = ["custom", "preset"];
     for (const example of examples) {
-      await container
+      await builtContainer
         .withWorkdir(`/workspace/examples/${example}`)
         .withExec(["npm", "ci"])
         .withExec(["npm", "run", "build"])
