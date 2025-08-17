@@ -1,5 +1,48 @@
 # Changelog
 
+## [1.13.1](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.13.0...v1.13.1) (2025-06-15)
+
+
+### Bug Fixes
+
+* **deps:** update npm ([b9fcade](https://github.com/shepherdjerred/astro-opengraph-images/commit/b9fcade117d727d0ab2d1f697e06ec29356010bb))
+* **deps:** update npm ([613f9f5](https://github.com/shepherdjerred/astro-opengraph-images/commit/613f9f51c0ec3842e5a19325d6a856812eff87cb))
+
+## [1.13.0](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.12.3...v1.13.0) (2025-06-01)
+
+
+### Features
+
+* **docs:** add guide for loading local images with base64 encoding in custom renderers ([a48d338](https://github.com/shepherdjerred/astro-opengraph-images/commit/a48d33872ba3b328c8f742beaf09d1a59148f125))
+
+
+### Bug Fixes
+
+* **deps:** update npm ([9639719](https://github.com/shepherdjerred/astro-opengraph-images/commit/963971966ecfef257dbd99f3107ef5e1504e4f82))
+
+## [1.12.3](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.12.2...v1.12.3) (2025-04-17)
+
+
+### Bug Fixes
+
+* use path.relative for og:image check, properly handle ntfs paths & add more comments ([d45c4cd](https://github.com/shepherdjerred/astro-opengraph-images/commit/d45c4cd0d1b9037829f64b806edd0e46e82813d3))
+
+## [1.12.2](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.12.1...v1.12.2) (2025-04-16)
+
+
+### Bug Fixes
+
+* **deps:** update dependency jsdom to v26.1.0 ([0f3737b](https://github.com/shepherdjerred/astro-opengraph-images/commit/0f3737b2764b38523cfbecc56061c76754fd6042))
+* **deps:** update npm ([20adbbb](https://github.com/shepherdjerred/astro-opengraph-images/commit/20adbbb1f8253a5693e42b3fabfd33f4c4fe415c))
+* **plugin:** correct outDir path handling in buildDoneHook ([0838ede](https://github.com/shepherdjerred/astro-opengraph-images/commit/0838ede01e1a62072726e7aef39053b0cf3018e4))
+
+## [1.12.1](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.12.0...v1.12.1) (2025-03-13)
+
+
+### Bug Fixes
+
+* update README ([0445a43](https://github.com/shepherdjerred/astro-opengraph-images/commit/0445a4354ade6ef8c70ec88d4c050a0534d5f317))
+
 ## [1.12.0](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.11.7...v1.12.0) (2025-03-13)
 
 

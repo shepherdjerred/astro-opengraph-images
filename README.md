@@ -79,6 +79,7 @@ To better illustrate these steps, I've created a [video](https://www.loom.com/sh
    ```diff
    -import opengraphImages from "astro-opengraph-images";
    +import opengraphImages, { presets } from "astro-opengraph-images";
+   +import * as fs from "fs"; // The fs module is required to load fonts
 
    export default defineConfig({
      integrations: [
@@ -230,6 +231,68 @@ This library uses [Satori](https://github.com/vercel/satori) to convert React co
 > You can use the [Satori playground](https://og-playground.vercel.app/) to work on your images.
 >
 > You can use Tailwind syntax with [tw-to-css](https://github.com/vinicoder/tw-to-css). An example is the [Tailwind preset](https://github.com/shepherdjerred/astro-opengraph-images/blob/main/src/presets/tailwind.tsx). You'll need to install this package yourself.
+
+### Loading Local Images
+
+You may receive an error when setting the source attribute on an `img` tag, claiming you need an absolute URL. When using a custom renderer, you can load local images to use in your final image using the following syntax in your `.tsx` file:
+
+```javascript
+const filePath = path.join(process.cwd(), "src", "assets", "my-image.png");
+const imageBase64 = `data:image/png;base64,${fs.readFileSync(filePath).toString("base64")}`;
+```
+
+The code above will load the image at `src/assets/my-image.png` and convert it to a base64 string which can be passed to an image tag's `src` attribute. Be sure to update the `data:image/png;base64,` part of the string to match the image's type and that the image's file ath is correct.
+
+```jsx
+<img
+  style={{
+    ...twj("absolute inset-0 w-full h-full"),
+    ...{ objectFit: "cover" },
+  }}
+  src={imageBase64}
+/>
+```
+
+Here's a complete example of a custom renderer with a locally loaded image:
+
+```tsx
+import type { RenderFunctionInput } from "astro-opengraph-images";
+const { twj } = await import("tw-to-css");
+
+// Remember to import these modules
+import path from "path";
+import * as fs from "node:fs";
+
+const filePath = path.join(
+  process.cwd(),
+  "src",
+  "assets",
+  "my-image.png",
+);
+const imageBase64 = `data:image/png;base64,${fs.readFileSync(filePath).toString("base64")}`;
+
+// from https://fullstackheroes.com/resources/vercel-og-templates/simple/
+export async function simpleBlog({ title, description }: RenderFunctionInput): Promise<React.ReactNode> {
+  return Promise.resolve(
+    <div style={twj("h-full w-full flex items-start justify-start border border-blue-500 border-[12px] bg-gray-50")}>
+      <div style={twj("flex items-start justify-start h-full")}>
+        <!-- Locally loaded Image Used Here -->
+        <img
+          style={{
+            ...twj("absolute inset-0 w-full h-full"),
+            ...{ objectFit: "cover" },
+          }}
+          src={imageBase64}
+        />
+        <div style={twj("flex flex-col justify-between w-full h-full")}>
+          <h1 style={twj("text-[80px] p-20 font-black text-left")}>{title}</h1>
+          <div style={twj("text-2xl pb-10 px-20 font-bold mb-0")}>{description}</div>
+        </div>
+      </div>
+    </div>,
+  );
+}
+```
 
 ## Presets
 
