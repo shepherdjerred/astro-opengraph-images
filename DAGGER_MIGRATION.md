@@ -51,7 +51,7 @@ dagger call ci --source=.
 
 The GitHub Actions workflow (`.github/workflows/ci.yml`) automatically:
 
-- Installs Node.js and dependencies
+- Installs Bun and dependencies
 - Installs Dagger CLI
 - Runs the complete CI pipeline using `dagger call ci --source=.`
 

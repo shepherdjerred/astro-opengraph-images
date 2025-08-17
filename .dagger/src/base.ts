@@ -9,33 +9,6 @@ export function getBunContainer(): Container {
 }
 
 /**
- * Get a Bun container with Node.js support
- * @returns A Bun container with Node.js installed
- */
-export function getBunNodeContainer(): Container {
-  return dag
-    .container()
-    .from("oven/bun:latest")
-    .withWorkdir("/workspace")
-    .withExec(["apt", "update"])
-    .withExec(["apt", "install", "-y", "curl", "ca-certificates", "gnupg"])
-    .withExec(["mkdir", "-p", "/etc/apt/keyrings"])
-    .withExec([
-      "sh",
-      "-c",
-      "curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg",
-    ])
-    .withExec([
-      "sh",
-      "-c",
-      'echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_22.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list',
-    ])
-    .withExec(["apt", "update"])
-    .withExec(["apt", "install", "-y", "nodejs"])
-    .withExec(["npm", "install", "-g", "npm"]);
-}
-
-/**
  * Get a system container (Ubuntu) with basic tools
  * @returns An Ubuntu container with basic tools
  */

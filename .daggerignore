@@ -1,0 +1,61 @@
+# Dependencies
+node_modules
+*/node_modules
+**/node_modules
+
+# Build outputs
+dist
+*/dist
+**/dist
+build
+*/build
+**/build
+
+# Cache files
+.eslintcache
+.cache
+.turbo
+.next
+.nuxt
+.output
+.vite
+
+# IDE files
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+*.tmp
+*.temp
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Dagger specific
+.dagger/node_modules
+.dagger/dist
+.dagger/sdk
+
+# Other common artifacts
+coverage
+.nyc_output
+*.afphoto~lock~
+
+# Version Control
+.git
+.jj
