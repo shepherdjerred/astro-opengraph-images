@@ -1,4 +1,7 @@
 node_modules
 dist
 .eslintcache
-*.afphoto~lock~
+# Dagger
+.dagger/node_modules
+.dagger/dist
+.dagger/sdk
