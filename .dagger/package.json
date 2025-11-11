@@ -1,17 +1,17 @@
 {
-  "name": "@scout-for-lol/dagger",
+  "name": "astro-opengraph-images-dagger",
   "type": "module",
   "private": true,
   "scripts": {
     "build": "echo 'Dagger module ready'",
     "test": "echo 'No tests configured for Dagger module'",
-    "type-check": "bun tsc --noEmit",
     "lint": "bunx eslint src",
     "format": "bunx prettier --check src",
     "format:write": "bunx prettier --write src",
     "typecheck": "bunx tsc --noEmit"
   },
   "dependencies": {
+    "@dagger.io/dagger": "^0.19.6",
     "typescript": "^5.5.4"
   },
   "devDependencies": {

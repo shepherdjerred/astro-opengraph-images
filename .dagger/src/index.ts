@@ -1,4 +1,11 @@
-import { dag, func, argument, Directory, object } from "@dagger.io/dagger";
+import { argument, dag, Directory, func, object } from "@dagger.io/dagger";
+import type { Container } from "@dagger.io/dagger";
+
+const NODE_IMAGE = "node:22-bookworm";
+const WORKDIR = "/workspace";
+const NPM_CACHE = "astro-opengraph-images-npm-cache";
+const ROOT_NODE_MODULES_CACHE = "astro-opengraph-images-root-node-modules";
+const exampleNodeModulesCache = (example: string) => `astro-opengraph-images-example-${example}-node-modules`;
 
 @object()
 export class AstroOpengraphImages {
@@ -10,14 +17,8 @@ export class AstroOpengraphImages {
     @argument({ defaultPath: "." })
     source: Directory,
   ): Promise<string> {
-    return await dag
-      .container()
-      .from("node:lts")
-      .withWorkdir("/workspace")
-      .withDirectory("/workspace", source)
-      .withExec(["npm", "ci"])
-      .withExec(["npm", "run", "lint"])
-      .stdout();
+    const deps = this.installDependencies(source);
+    return await deps.withExec(["npm", "run", "lint"]).stdout();
   }
 
   /**
@@ -28,14 +29,20 @@ export class AstroOpengraphImages {
     @argument({ defaultPath: "." })
     source: Directory,
   ): Promise<string> {
-    return await dag
-      .container()
-      .from("node:lts")
-      .withWorkdir("/workspace")
-      .withDirectory("/workspace", source)
-      .withExec(["npm", "ci"])
-      .withExec(["npm", "run", "build"])
-      .stdout();
+    const build = this.buildRoot(source);
+    return await build.stdout();
+  }
+
+  /**
+   * Run unit tests
+   */
+  @func()
+  async test(
+    @argument({ defaultPath: "." })
+    source: Directory,
+  ): Promise<string> {
+    const deps = this.installDependencies(source);
+    return await deps.withExec(["npm", "run", "test"]).stdout();
   }
 
   /**
@@ -48,17 +55,10 @@ export class AstroOpengraphImages {
     @argument()
     example: string,
   ): Promise<string> {
-    return await dag
-      .container()
-      .from("node:lts")
-      .withWorkdir("/workspace")
-      .withDirectory("/workspace", source)
-      .withExec(["npm", "ci"])
-      .withExec(["npm", "run", "build"])
-      .withWorkdir(`/workspace/examples/${example}`)
-      .withExec(["npm", "ci"])
-      .withExec(["npm", "run", "build"])
-      .stdout();
+    const build = this.buildRoot(source);
+    await build.stdout();
+    await this.runExampleWithBase(example, build);
+    return `Example ${example} built successfully.`;
   }
 
   /**
@@ -69,49 +69,16 @@ export class AstroOpengraphImages {
     @argument({ defaultPath: "." })
     source: Directory,
   ): Promise<string> {
-    const container = dag
-      .container()
-      .from("node:lts")
-      .withWorkdir("/workspace")
-      .withDirectory("/workspace", source)
-      .withExec(["npm", "ci"])
-      .withExec(["npm", "run", "build"]);
+    const examples = await this.exampleNames(source);
+    const build = this.buildRoot(source);
+    await build.stdout();
 
-    // Get list of example directories
-    const exampleDirs = await container
-      .withExec(["ls", "-1", "examples"])
-      .stdout();
-
-    const examples = exampleDirs.trim().split("\n").filter((dir: string) => dir.trim());
-    
-    // Test each example
     for (const example of examples) {
-      await container
-        .withWorkdir(`/workspace/examples/${example}`)
-        .withExec(["npm", "ci"])
-        .withExec(["npm", "run", "build"])
-        .stdout();
+      await this.runExampleWithBase(example, build);
     }
 
-    return `All ${examples.length} examples tested successfully: ${examples.join(", ")}`;
-  }
-
-  /**
-   * Run unit tests
-   */
-  @func()
-  async test(
-    @argument({ defaultPath: "." })
-    source: Directory,
-  ): Promise<string> {
-    return await dag
-      .container()
-      .from("node:lts")
-      .withWorkdir("/workspace")
-      .withDirectory("/workspace", source)
-      .withExec(["npm", "ci"])
-      .withExec(["npm", "run", "test"])
-      .stdout();
+    const exampleList = examples.join(", ");
+    return `All ${examples.length.toString()} examples built successfully: ${exampleList}`;
   }
 
   /**
@@ -122,37 +89,62 @@ export class AstroOpengraphImages {
     @argument({ defaultPath: "." })
     source: Directory,
   ): Promise<string> {
-    const container = dag
-      .container()
-      .from("node:lts")
-      .withWorkdir("/workspace")
-      .withDirectory("/workspace", source)
-      .withExec(["npm", "ci"]);
+    const deps = this.installDependencies(source);
 
-    // Run lint
-    await container.withExec(["npm", "run", "lint"]).stdout();
+    await deps.withExec(["npm", "run", "lint"]).stdout();
 
-    // Run build
-    await container.withExec(["npm", "run", "build"]).stdout();
+    const build = deps.withExec(["npm", "run", "build"]);
+    await build.stdout();
 
-    // Run tests
-    await container.withExec(["npm", "run", "test"]).stdout();
+    await deps.withExec(["npm", "run", "test"]).stdout();
 
-    // Test all examples dynamically
-    const exampleDirs = await container
-      .withExec(["ls", "-1", "examples"])
-      .stdout();
-
-    const examples = exampleDirs.trim().split("\n").filter((dir: string) => dir.trim());
-
+    const examples = await this.exampleNames(source);
     for (const example of examples) {
-      await container
-        .withWorkdir(`/workspace/examples/${example}`)
-        .withExec(["npm", "ci"])
-        .withExec(["npm", "run", "build"])
-        .stdout();
+      await this.runExampleWithBase(example, build);
     }
 
-    return `CI pipeline completed successfully. Tested ${examples.length} examples: ${examples.join(", ")}`;
+    const exampleList = examples.join(", ");
+    return `CI pipeline completed successfully. Tested ${examples.length.toString()} examples: ${exampleList}`;
+  }
+
+  private base(source: Directory): Container {
+    return dag
+      .container()
+      .from(NODE_IMAGE)
+      .withWorkdir(WORKDIR)
+      .withEnvVariable("CI", "true")
+      .withDirectory(WORKDIR, source, {
+        exclude: ["node_modules", "examples/*/node_modules", "**/.astro", "**/.dagger"],
+      });
+  }
+
+  private installDependencies(source: Directory): Container {
+    return this.base(source)
+      .withMountedCache("/root/.npm", dag.cacheVolume(NPM_CACHE))
+      .withMountedCache(`${WORKDIR}/node_modules`, dag.cacheVolume(ROOT_NODE_MODULES_CACHE))
+      .withExec(["npm", "ci"]);
+  }
+
+  private buildRoot(source: Directory): Container {
+    return this.installDependencies(source).withExec(["npm", "run", "build"]);
+  }
+
+  private async exampleNames(source: Directory): Promise<string[]> {
+    const examplesDir = source.directory("examples");
+    const entries = await examplesDir.entries();
+    return entries.filter((entry) => entry.trim().length > 0).sort();
+  }
+
+  private async runExampleWithBase(example: string, base: Container): Promise<void> {
+    const exampleWorkdir = `${WORKDIR}/examples/${example}`;
+    let container = base
+      .withWorkdir(exampleWorkdir)
+      .withMountedCache("/root/.npm", dag.cacheVolume(NPM_CACHE))
+      .withMountedCache(`${exampleWorkdir}/node_modules`, dag.cacheVolume(exampleNodeModulesCache(example)))
+      .withExec(["npm", "ci"]);
+
+    container = container.withExec(["npm", "run", "build"]);
+
+    await container.stdout();
   }
 }
