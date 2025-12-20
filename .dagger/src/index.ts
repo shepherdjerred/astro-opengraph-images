@@ -1,0 +1,250 @@
+import { argument, dag, Directory, func, object, Secret } from "@dagger.io/dagger";
+import type { Container } from "@dagger.io/dagger";
+import {
+  getNodeContainer,
+  versions,
+  withTiming,
+  runNamedParallel,
+  releasePr as sharedReleasePr,
+  githubRelease as sharedGithubRelease,
+  type NamedResult,
+} from "@shepherdjerred/dagger-utils";
+
+const WORKDIR = "/workspace";
+const NPM_CACHE = "astro-opengraph-images-npm-cache";
+const ROOT_NODE_MODULES_CACHE = "astro-opengraph-images-root-node-modules";
+const exampleNodeModulesCache = (example: string) => `astro-opengraph-images-example-${example}-node-modules`;
+
+@object()
+export class AstroOpengraphImages {
+  /**
+   * Run linting on the project
+   */
+  @func()
+  async lint(
+    @argument({ defaultPath: "." })
+    source: Directory,
+  ): Promise<string> {
+    return withTiming("lint", async () => {
+      const deps = this.installDependencies(source);
+      return deps.withExec(["npm", "run", "lint"]).stdout();
+    });
+  }
+
+  /**
+   * Build the project
+   */
+  @func()
+  async build(
+    @argument({ defaultPath: "." })
+    source: Directory,
+  ): Promise<string> {
+    return withTiming("build", async () => {
+      const build = this.buildRoot(source);
+      return build.stdout();
+    });
+  }
+
+  /**
+   * Run unit tests
+   */
+  @func()
+  async test(
+    @argument({ defaultPath: "." })
+    source: Directory,
+  ): Promise<string> {
+    return withTiming("test", async () => {
+      const deps = this.installDependencies(source);
+      return deps.withExec(["npm", "run", "test"]).stdout();
+    });
+  }
+
+  /**
+   * Test a specific example
+   */
+  @func()
+  async testExample(
+    @argument({ defaultPath: "." })
+    source: Directory,
+    @argument()
+    example: string,
+  ): Promise<string> {
+    return withTiming(`test-example:${example}`, async () => {
+      const build = this.buildRoot(source);
+      await build.stdout();
+      await this.runExampleWithBase(example, build);
+      return `Example ${example} built successfully.`;
+    });
+  }
+
+  /**
+   * Test all examples in parallel
+   */
+  @func()
+  async testAll(
+    @argument({ defaultPath: "." })
+    source: Directory,
+  ): Promise<string> {
+    return withTiming("test-all-examples", async () => {
+      const examples = await this.exampleNames(source);
+      const build = this.buildRoot(source);
+      await build.stdout();
+
+      const results = await runNamedParallel(
+        examples.map((example) => ({
+          name: example,
+          operation: () => this.runExampleWithBase(example, build),
+        })),
+      );
+
+      const failed = results.filter((r: NamedResult<void>) => !r.success);
+      if (failed.length > 0) {
+        const failedNames = failed.map((r: NamedResult<void>) => r.name).join(", ");
+        throw new Error(`Examples failed: ${failedNames}`);
+      }
+
+      const exampleList = examples.join(", ");
+      return `All ${examples.length.toString()} examples built successfully: ${exampleList}`;
+    });
+  }
+
+  /**
+   * Run the complete CI pipeline
+   */
+  @func()
+  async ci(
+    @argument({ defaultPath: "." })
+    source: Directory,
+  ): Promise<string> {
+    return withTiming("ci", async () => {
+      const deps = this.installDependencies(source);
+
+      await withTiming("lint", () => deps.withExec(["npm", "run", "lint"]).stdout());
+
+      const build = deps.withExec(["npm", "run", "build"]);
+      await withTiming("build", () => build.stdout());
+
+      await withTiming("test", () => deps.withExec(["npm", "run", "test"]).stdout());
+
+      const examples = await this.exampleNames(source);
+
+      await withTiming("test-examples", async () => {
+        const results = await runNamedParallel(
+          examples.map((example) => ({
+            name: example,
+            operation: () => this.runExampleWithBase(example, build),
+          })),
+        );
+
+        const failed = results.filter((r: NamedResult<void>) => !r.success);
+        if (failed.length > 0) {
+          const failedNames = failed.map((r: NamedResult<void>) => r.name).join(", ");
+          throw new Error(`Examples failed: ${failedNames}`);
+        }
+      });
+
+      const exampleList = examples.join(", ");
+      return `CI pipeline completed successfully. Tested ${examples.length.toString()} examples: ${exampleList}`;
+    });
+  }
+
+  /**
+   * Create or update a release PR based on conventional commits
+   */
+  @func()
+  async releasePr(
+    @argument()
+    githubToken: Secret,
+    @argument()
+    repoUrl: string,
+  ): Promise<string> {
+    return withTiming("release-pr", async () => {
+      return sharedReleasePr({
+        ghToken: githubToken,
+        repoUrl,
+        releaseType: "node",
+      });
+    });
+  }
+
+  /**
+   * Create a GitHub release when a release PR has been merged
+   */
+  @func()
+  async githubRelease(
+    @argument()
+    githubToken: Secret,
+    @argument()
+    repoUrl: string,
+  ): Promise<string> {
+    return withTiming("github-release", async () => {
+      return sharedGithubRelease({
+        ghToken: githubToken,
+        repoUrl,
+        releaseType: "node",
+      });
+    });
+  }
+
+  /**
+   * Publish package to npm (runs CI first)
+   */
+  @func()
+  async publish(
+    @argument({ defaultPath: "." })
+    source: Directory,
+    @argument()
+    npmToken: Secret,
+  ): Promise<string> {
+    return withTiming("publish", async () => {
+      // Run CI first to ensure everything passes
+      await this.ci(source);
+
+      // Build and publish
+      const container = this.installDependencies(source)
+        .withExec(["npm", "run", "build"])
+        .withSecretVariable("NPM_TOKEN", npmToken)
+        .withExec(["sh", "-c", 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc && npm publish']);
+
+      return container.stdout();
+    });
+  }
+
+  private base(source: Directory): Container {
+    return getNodeContainer(undefined, undefined, versions.node)
+      .withEnvVariable("CI", "true")
+      .withDirectory(WORKDIR, source, {
+        exclude: ["node_modules", "examples/*/node_modules", "**/.astro", "**/.dagger"],
+      });
+  }
+
+  private installDependencies(source: Directory): Container {
+    return this.base(source)
+      .withMountedCache("/root/.npm", dag.cacheVolume(NPM_CACHE))
+      .withMountedCache(`${WORKDIR}/node_modules`, dag.cacheVolume(ROOT_NODE_MODULES_CACHE))
+      .withExec(["npm", "ci"]);
+  }
+
+  private buildRoot(source: Directory): Container {
+    return this.installDependencies(source).withExec(["npm", "run", "build"]);
+  }
+
+  private async exampleNames(source: Directory): Promise<string[]> {
+    const examplesDir = source.directory("examples");
+    const entries = await examplesDir.entries();
+    return entries.filter((entry) => entry.trim().length > 0).sort();
+  }
+
+  private async runExampleWithBase(example: string, base: Container): Promise<void> {
+    const exampleWorkdir = `${WORKDIR}/examples/${example}`;
+    let container = base
+      .withWorkdir(exampleWorkdir)
+      .withMountedCache("/root/.npm", dag.cacheVolume(NPM_CACHE))
+      .withMountedCache(`${exampleWorkdir}/node_modules`, dag.cacheVolume(exampleNodeModulesCache(example)))
+      .withExec(["npm", "ci"]);
+
+    container = container.withExec(["npm", "run", "build"]);
+
+    await container.stdout();
+  }
+}

@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  dagger-ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "latest"
+
+      - name: Install Dagger CLI
+        run: |
+          curl -L https://dl.dagger.io/dagger/install.sh | BIN_DIR=$HOME/.local/bin sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Install Dagger module dependencies
+        working-directory: .dagger
+        run: bun install --frozen-lockfile
+
+      - name: Run Dagger CI pipeline
+        env:
+          DAGGER_CLOUD_TOKEN: ${{ secrets.DAGGER_CLOUD_TOKEN }}
+        run: |
+          dagger call ci --source=.
+
+permissions:
+  contents: read
