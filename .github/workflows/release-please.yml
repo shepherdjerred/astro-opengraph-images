@@ -1,35 +1,61 @@
+name: Release
+
 on:
   push:
-    branches:
-      - main
-name: release-please
+    branches: [main]
+
 permissions:
   contents: write
   pull-requests: write
+
 jobs:
-  release-please:
+  release:
     runs-on: ubuntu-latest
     steps:
-      - uses: googleapis/release-please-action@v4
-        id: release
-        with:
-          release-type: node
       - uses: actions/checkout@v4
-        if: ${{ steps.release.outputs.release_created }}
-      - uses: actions/setup-node@v4
+
+      - uses: oven-sh/setup-bun@v2
         with:
-          node-version: 20
-          registry-url: "https://registry.npmjs.org"
-        if: ${{ steps.release.outputs.release_created }}
-      - run: npm ci
-        if: ${{ steps.release.outputs.release_created }}
-      - run: npm run lint
-        if: ${{ steps.release.outputs.release_created }}
-      - run: npm run build
-        if: ${{ steps.release.outputs.release_created }}
-      - run: npm test
-        if: ${{ steps.release.outputs.release_created }}
-      - run: npm publish
+          bun-version: "latest"
+
+      - name: Install Dagger CLI
+        run: |
+          curl -L https://dl.dagger.io/dagger/install.sh | BIN_DIR=$HOME/.local/bin sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Install Dagger module dependencies
+        working-directory: .dagger
+        run: bun install --frozen-lockfile
+
+      - name: Create/Update Release PR
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        if: ${{ steps.release.outputs.release_created }}
+          DAGGER_CLOUD_TOKEN: ${{ secrets.DAGGER_CLOUD_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          dagger call release-pr \
+            --github-token=env:GITHUB_TOKEN \
+            --repo-url="shepherdjerred/astro-opengraph-images"
+
+      - name: Create GitHub Release
+        id: github-release
+        env:
+          DAGGER_CLOUD_TOKEN: ${{ secrets.DAGGER_CLOUD_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          output=$(dagger call github-release \
+            --github-token=env:GITHUB_TOKEN \
+            --repo-url="shepherdjerred/astro-opengraph-images")
+          echo "$output"
+          if echo "$output" | grep -q "github.com.*releases"; then
+            echo "release_created=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Publish to npm
+        if: steps.github-release.outputs.release_created == 'true'
+        env:
+          DAGGER_CLOUD_TOKEN: ${{ secrets.DAGGER_CLOUD_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          dagger call publish \
+            --source=. \
+            --npm-token=env:NPM_TOKEN

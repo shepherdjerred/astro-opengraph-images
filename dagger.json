@@ -1,0 +1,5 @@
+{
+  "name": "astro-opengraph-images",
+  "sdk": "typescript",
+  "source": ".dagger"
+}
