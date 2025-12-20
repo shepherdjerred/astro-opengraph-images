@@ -80,7 +80,7 @@
     "package.json",
     "README.md",
     "LICENSE",
-    "package-lock.json",
+    "bun.lock",
     "CHANGELOG.md"
   ]
 }
