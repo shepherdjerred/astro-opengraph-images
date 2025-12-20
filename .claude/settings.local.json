@@ -29,7 +29,8 @@
       "mcp__github__get_pull_request",
       "mcp__github__get_pull_request_status",
       "mcp__github__update_pull_request_branch",
-      "WebFetch(domain:api.github.com)"
+      "WebFetch(domain:api.github.com)",
+      "Bash(gh run watch:*)"
     ]
   }
 }
