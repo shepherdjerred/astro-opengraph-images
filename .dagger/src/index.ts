@@ -1,8 +1,6 @@
 import { argument, dag, Directory, func, object, Secret } from "@dagger.io/dagger";
 import type { Container } from "@dagger.io/dagger";
 import {
-  getNodeContainer,
-  versions,
   withTiming,
   runNamedParallel,
   releasePr as sharedReleasePr,
@@ -11,7 +9,7 @@ import {
 } from "@shepherdjerred/dagger-utils";
 
 const WORKDIR = "/workspace";
-const NPM_CACHE = "astro-opengraph-images-npm-cache";
+const BUN_CACHE = "astro-opengraph-images-bun-cache";
 const ROOT_NODE_MODULES_CACHE = "astro-opengraph-images-root-node-modules";
 const exampleNodeModulesCache = (example: string) => `astro-opengraph-images-example-${example}-node-modules`;
 
@@ -27,7 +25,7 @@ export class AstroOpengraphImages {
   ): Promise<string> {
     return withTiming("lint", async () => {
       const deps = this.installDependencies(source);
-      return deps.withExec(["npm", "run", "lint"]).stdout();
+      return deps.withExec(["bun", "run", "lint"]).stdout();
     });
   }
 
@@ -55,7 +53,7 @@ export class AstroOpengraphImages {
   ): Promise<string> {
     return withTiming("test", async () => {
       const deps = this.installDependencies(source);
-      return deps.withExec(["npm", "run", "test"]).stdout();
+      return deps.withExec(["bun", "run", "test"]).stdout();
     });
   }
 
@@ -119,12 +117,12 @@ export class AstroOpengraphImages {
     return withTiming("ci", async () => {
       const deps = this.installDependencies(source);
 
-      await withTiming("lint", () => deps.withExec(["npm", "run", "lint"]).stdout());
+      await withTiming("lint", () => deps.withExec(["bun", "run", "lint"]).stdout());
 
-      const build = deps.withExec(["npm", "run", "build"]);
+      const build = deps.withExec(["bun", "run", "build"]);
       await withTiming("build", () => build.stdout());
 
-      await withTiming("test", () => deps.withExec(["npm", "run", "test"]).stdout());
+      await withTiming("test", () => deps.withExec(["bun", "run", "test"]).stdout());
 
       const examples = await this.exampleNames(source);
 
@@ -202,7 +200,7 @@ export class AstroOpengraphImages {
 
       // Build and publish
       const container = this.installDependencies(source)
-        .withExec(["npm", "run", "build"])
+        .withExec(["bun", "run", "build"])
         .withSecretVariable("NPM_TOKEN", npmToken)
         .withExec(["sh", "-c", 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc && npm publish']);
 
@@ -211,7 +209,10 @@ export class AstroOpengraphImages {
   }
 
   private base(source: Directory): Container {
-    return getNodeContainer(undefined, undefined, versions.node)
+    return dag
+      .container()
+      .from("oven/bun:latest")
+      .withWorkdir(WORKDIR)
       .withEnvVariable("CI", "true")
       .withDirectory(WORKDIR, source, {
         exclude: ["node_modules", "examples/*/node_modules", "**/.astro", "**/.dagger"],
@@ -220,13 +221,13 @@ export class AstroOpengraphImages {
 
   private installDependencies(source: Directory): Container {
     return this.base(source)
-      .withMountedCache("/root/.npm", dag.cacheVolume(NPM_CACHE))
+      .withMountedCache("/root/.bun/install/cache", dag.cacheVolume(BUN_CACHE))
       .withMountedCache(`${WORKDIR}/node_modules`, dag.cacheVolume(ROOT_NODE_MODULES_CACHE))
-      .withExec(["npm", "ci"]);
+      .withExec(["bun", "install", "--frozen-lockfile"]);
   }
 
   private buildRoot(source: Directory): Container {
-    return this.installDependencies(source).withExec(["npm", "run", "build"]);
+    return this.installDependencies(source).withExec(["bun", "run", "build"]);
   }
 
   private async exampleNames(source: Directory): Promise<string[]> {
@@ -239,11 +240,11 @@ export class AstroOpengraphImages {
     const exampleWorkdir = `${WORKDIR}/examples/${example}`;
     let container = base
       .withWorkdir(exampleWorkdir)
-      .withMountedCache("/root/.npm", dag.cacheVolume(NPM_CACHE))
+      .withMountedCache("/root/.bun/install/cache", dag.cacheVolume(BUN_CACHE))
       .withMountedCache(`${exampleWorkdir}/node_modules`, dag.cacheVolume(exampleNodeModulesCache(example)))
-      .withExec(["npm", "ci"]);
+      .withExec(["bun", "install", "--frozen-lockfile"]);
 
-    container = container.withExec(["npm", "run", "build"]);
+    container = container.withExec(["bun", "run", "build"]);
 
     await container.stdout();
   }

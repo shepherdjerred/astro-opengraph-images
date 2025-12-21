@@ -11,7 +11,6 @@
     "typecheck": "bunx tsc --noEmit"
   },
   "dependencies": {
-    "@dagger.io/dagger": "^0.19.6",
     "@shepherdjerred/dagger-utils": "^0.3.0",
     "typescript": "^5.5.4"
   },
