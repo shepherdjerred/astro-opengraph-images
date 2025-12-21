@@ -1,3 +1,4 @@
+import fs from "node:fs";
 import { defineConfig } from "astro/config";
 import opengraphImages from "astro-opengraph-images";
 import { customOgMediaLayout } from "./src/customRenderer";
