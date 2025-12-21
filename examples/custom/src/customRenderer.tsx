@@ -1,5 +1,4 @@
 import type { RenderFunctionInput } from "astro-opengraph-images";
-import React from "react";
 const { twj } = await import("tw-to-css");
 
 export function customOgMediaLayout({ title }: RenderFunctionInput): Promise<React.ReactNode> {
