@@ -27,6 +27,7 @@ jobs:
         env:
           DAGGER_CLOUD_TOKEN: op://GitHub Actions/Secrets/add more/DAGGER_CLOUD_TOKEN
           NPM_TOKEN: op://GitHub Actions/Secrets/add more/NPM_TOKEN
+          GH_TOKEN: op://GitHub Actions/Secrets/add more/GH_TOKEN
 
       - name: Extract kubectl version
         id: kubectl-version
@@ -83,7 +84,7 @@ jobs:
 
       - name: Run Dagger CI with release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ env.GH_TOKEN }}
         run: |
           ARGS=(
             --source=.
