@@ -72,9 +72,34 @@ jobs:
         working-directory: .dagger
         run: bun install --frozen-lockfile
 
-      - name: Run Dagger CI pipeline
+      - name: Determine environment
+        id: env
         run: |
-          dagger call ci --source=.
+          if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == "refs/heads/main" ]]; then
+            echo "env=prod" >> "$GITHUB_OUTPUT"
+          else
+            echo "env=dev" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run Dagger CI with release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ARGS=(
+            --source=.
+            --env="${{ steps.env.outputs.env }}"
+          )
+
+          if [[ "${{ steps.env.outputs.env }}" == "prod" ]]; then
+            ARGS+=(
+              --repo-url="shepherdjerred/astro-opengraph-images"
+              --github-token=env:GITHUB_TOKEN
+              --npm-token=env:NPM_TOKEN
+            )
+          fi
+
+          dagger call ci-with-release "${ARGS[@]}"
 
 permissions:
-  contents: read
+  contents: write
+  pull-requests: write

@@ -208,6 +208,74 @@ export class AstroOpengraphImages {
     });
   }
 
+  /**
+   * Run CI and handle release logic (for main branch pushes).
+   * Combines ci, release-pr, github-release, and publish into a single entry point.
+   * @param source The source directory
+   * @param env The environment (dev or prod)
+   * @param repoUrl The repository URL (e.g., "shepherdjerred/astro-opengraph-images")
+   * @param githubToken GitHub token for release-please
+   * @param npmToken NPM token for publishing (only needed for prod)
+   */
+  @func()
+  async ciWithRelease(
+    @argument({ defaultPath: "." })
+    source: Directory,
+    env = "dev",
+    repoUrl?: string,
+    githubToken?: Secret,
+    npmToken?: Secret,
+  ): Promise<string> {
+    const isProd = env === "prod";
+
+    return withTiming("ci-with-release", async () => {
+      // Always run CI first
+      const ciResult = await this.ci(source);
+
+      if (!isProd) {
+        return ciResult;
+      }
+
+      // For prod, also handle release-please flow
+      if (!repoUrl || !githubToken) {
+        throw new Error("repoUrl and githubToken are required for prod environment");
+      }
+
+      // Create/update release PR
+      const releasePrResult = await withTiming("release-pr", async () => {
+        return sharedReleasePr({
+          ghToken: githubToken,
+          repoUrl,
+          releaseType: "node",
+        });
+      });
+
+      // Try to create GitHub release (only succeeds if release PR was just merged)
+      const githubReleaseResult = await withTiming("github-release", async () => {
+        return sharedGithubRelease({
+          ghToken: githubToken,
+          repoUrl,
+          releaseType: "node",
+        });
+      });
+
+      // If a release was created and we have an npm token, publish
+      const releaseCreated = githubReleaseResult.includes("github.com") && githubReleaseResult.includes("releases");
+      if (releaseCreated && npmToken) {
+        await withTiming("npm-publish", async () => {
+          const container = this.installDependencies(source)
+            .withExec(["bun", "run", "build"])
+            .withSecretVariable("NPM_TOKEN", npmToken)
+            .withExec(["sh", "-c", 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc && npm publish']);
+          return container.stdout();
+        });
+        return `${ciResult}\nRelease PR: ${releasePrResult}\nGitHub Release: ${githubReleaseResult}\nPackage published to npm`;
+      }
+
+      return `${ciResult}\nRelease PR: ${releasePrResult}\nGitHub Release: ${githubReleaseResult}`;
+    });
+  }
+
   private base(source: Directory): Container {
     return dag
       .container()
