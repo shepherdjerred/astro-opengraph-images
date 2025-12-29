@@ -12,6 +12,7 @@ const WORKDIR = "/workspace";
 const BUN_CACHE = "astro-opengraph-images-bun-cache";
 const ROOT_NODE_MODULES_CACHE = "astro-opengraph-images-root-node-modules";
 const exampleNodeModulesCache = (example: string) => `astro-opengraph-images-example-${example}-node-modules`;
+const exampleBunCache = (example: string) => `astro-opengraph-images-example-${example}-bun-cache`;
 
 @object()
 export class AstroOpengraphImages {
@@ -306,9 +307,10 @@ export class AstroOpengraphImages {
 
   private async runExampleWithBase(example: string, base: Container): Promise<void> {
     const exampleWorkdir = `${WORKDIR}/examples/${example}`;
+    // Use per-example bun cache to avoid race conditions when running examples in parallel
     let container = base
       .withWorkdir(exampleWorkdir)
-      .withMountedCache("/root/.bun/install/cache", dag.cacheVolume(BUN_CACHE))
+      .withMountedCache("/root/.bun/install/cache", dag.cacheVolume(exampleBunCache(example)))
       .withMountedCache(`${exampleWorkdir}/node_modules`, dag.cacheVolume(exampleNodeModulesCache(example)))
       .withExec(["bun", "install", "--frozen-lockfile"]);
 
