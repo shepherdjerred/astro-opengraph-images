@@ -17,12 +17,12 @@ jobs:
         with:
           bun-version: latest
 
-      - uses: 1password/load-secrets-action/configure@v2
+      - uses: 1password/load-secrets-action/configure@v3
         with:
           connect-host: http://onepassword-connect.1password.svc.cluster.local:8080
           connect-token: ${{ secrets.OP_CONNECT_TOKEN }}
 
-      - uses: 1password/load-secrets-action@v2
+      - uses: 1password/load-secrets-action@v3
         with:
           export-env: true
         env:
