@@ -301,14 +301,18 @@ export class AstroOpengraphImages {
   private async exampleNames(source: Directory): Promise<string[]> {
     const examplesDir = source.directory("examples");
     const entries = await examplesDir.entries();
-    return entries.filter((entry) => entry.trim().length > 0).sort();
+    return entries
+      .map((entry) => entry.replace(/\/+$/, "")) // Strip trailing slashes from directory names
+      .filter((entry) => entry.trim().length > 0)
+      .sort();
   }
 
   private async runExampleWithBase(example: string, base: Container): Promise<void> {
     const exampleWorkdir = `${WORKDIR}/examples/${example}`;
+    // Don't use bun install cache for examples - avoids stale cache entries for local file references
+    // and race conditions when running in parallel. node_modules cache is still used.
     let container = base
       .withWorkdir(exampleWorkdir)
-      .withMountedCache("/root/.bun/install/cache", dag.cacheVolume(BUN_CACHE))
       .withMountedCache(`${exampleWorkdir}/node_modules`, dag.cacheVolume(exampleNodeModulesCache(example)))
       .withExec(["bun", "install", "--frozen-lockfile"]);
 
