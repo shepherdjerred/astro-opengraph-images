@@ -101,7 +101,22 @@ jobs:
             )
           fi
 
-          dagger call ci-with-release "${ARGS[@]}"
+          # Workaround: Dagger may exit non-zero during session cleanup even when CI passes
+          # due to Kubernetes container lifecycle issues (container stops before shutdown).
+          # Capture output and check if CI actually completed successfully.
+          set +e
+          OUTPUT=$(dagger call ci-with-release "${ARGS[@]}" 2>&1)
+          EXIT_CODE=$?
+          echo "$OUTPUT"
+          set -e
+
+          if echo "$OUTPUT" | grep -q "ciWithRelease.*DONE"; then
+            echo "CI completed successfully (ignoring cleanup exit code $EXIT_CODE)"
+            exit 0
+          else
+            echo "CI failed with exit code $EXIT_CODE"
+            exit $EXIT_CODE
+          fi
 
 permissions:
   contents: write
