@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.14.0](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.13.1...v1.14.0) (2026-01-04)
+
+
+### Features
+
+* **ci:** migrate to Dagger with GitHub Actions and release-please integration ([c03a2d3](https://github.com/shepherdjerred/astro-opengraph-images/commit/c03a2d34cbd8afbc368893b49901af076307cb1a))
+* **ci:** migrate to Dagger with GitHub Actions and release-please integration ([b689e51](https://github.com/shepherdjerred/astro-opengraph-images/commit/b689e51bd8b7a058e76b0dc4bcaf771b60137952))
+
+
+### Bug Fixes
+
+* add bunfig.toml for JSX configuration ([401faa3](https://github.com/shepherdjerred/astro-opengraph-images/commit/401faa3fd0b3119cf97c398c1f4b804e2d84aa5a))
+* add fs import and configure JSX for bun compatibility ([f6bbb23](https://github.com/shepherdjerred/astro-opengraph-images/commit/f6bbb231bf05fa8681c9d9b473901230827d73a1))
+* **deps:** update dependency @shepherdjerred/dagger-utils to ^0.5.0 ([#185](https://github.com/shepherdjerred/astro-opengraph-images/issues/185)) ([d0e5f13](https://github.com/shepherdjerred/astro-opengraph-images/commit/d0e5f13f096a331c5cc6d7996c357d0ffb1e077a))
+* **deps:** update dependency jsdom to v27 ([ded5e18](https://github.com/shepherdjerred/astro-opengraph-images/commit/ded5e18a866d2a6a22c00efdcaf2e75e7d131776))
+* **deps:** update dependency satori to ^0.18.0 ([337a788](https://github.com/shepherdjerred/astro-opengraph-images/commit/337a7885ed4d020e1cc60a2a6e743983639cec5b))
+* handle URL-encoded paths and add emoji support ([#188](https://github.com/shepherdjerred/astro-opengraph-images/issues/188)) ([08bf28b](https://github.com/shepherdjerred/astro-opengraph-images/commit/08bf28bb422090b58b1815cc7ddad0245ce228df))
+* remove explicit React import for new JSX transform ([b768047](https://github.com/shepherdjerred/astro-opengraph-images/commit/b7680474f9aabc75741c7eb9be0fa1039854684b))
+* Remove fortc.com ([51db246](https://github.com/shepherdjerred/astro-opengraph-images/commit/51db24618dd8676c6922898067b3344e56e1650f))
+* use createElement instead of JSX in custom example ([a9c3b45](https://github.com/shepherdjerred/astro-opengraph-images/commit/a9c3b45fd1fc97a60e0f7a687cc5cfdef052b1e7))
+
 ## [1.13.1](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.13.0...v1.13.1) (2025-06-15)
 
 
