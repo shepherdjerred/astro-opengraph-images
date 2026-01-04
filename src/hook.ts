@@ -66,8 +66,8 @@ async function handlePage({ page, options, render, dir, logger }: HandlePageInpu
   // path.relative() returns the relative path from the first argument to the second argument.
   const relativePngFile = path.relative(fileURLToPath(dir), pngFile).replace(/\\/g, "/");
 
-  // convert the image path to a URL and remove the leading slash
-  const imageUrl = new URL(pageDetails.image).pathname.slice(1);
+  // convert the image path to a URL, decode URL-encoded characters, and remove the leading slash
+  const imageUrl = decodeURIComponent(new URL(pageDetails.image).pathname.slice(1));
 
   // check that the og:image property matches the sitePath
   if (imageUrl !== relativePngFile) {
