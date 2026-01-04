@@ -68,4 +68,6 @@ export interface SatoriOptions {
   width: number;
   height: number;
   fonts: NonEmptyArray<SatoriFontOptions>;
+  /** Callback to load additional assets like emoji images or fallback fonts */
+  loadAdditionalAsset?: (languageCode: string, segment: string) => Promise<string | SatoriFontOptions[]>;
 }
