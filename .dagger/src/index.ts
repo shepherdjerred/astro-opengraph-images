@@ -2,10 +2,8 @@ import { argument, dag, Directory, func, object, Secret } from "@dagger.io/dagge
 import type { Container } from "@dagger.io/dagger";
 import {
   withTiming,
-  runNamedParallel,
   releasePr as sharedReleasePr,
   githubRelease as sharedGithubRelease,
-  type NamedResult,
 } from "@shepherdjerred/dagger-utils";
 
 const WORKDIR = "/workspace";
@@ -57,55 +55,6 @@ export class AstroOpengraphImages {
   }
 
   /**
-   * Test a specific example
-   */
-  @func()
-  async testExample(
-    @argument({ defaultPath: "." })
-    source: Directory,
-    @argument()
-    example: string,
-  ): Promise<string> {
-    return withTiming(`test-example:${example}`, async () => {
-      const build = this.buildRoot(source);
-      await build.stdout();
-      await this.runExampleWithBase(example, build);
-      return `Example ${example} built successfully.`;
-    });
-  }
-
-  /**
-   * Test all examples in parallel
-   */
-  @func()
-  async testAll(
-    @argument({ defaultPath: "." })
-    source: Directory,
-  ): Promise<string> {
-    return withTiming("test-all-examples", async () => {
-      const examples = await this.exampleNames(source);
-      const build = this.buildRoot(source);
-      await build.stdout();
-
-      const results = await runNamedParallel(
-        examples.map((example) => ({
-          name: example,
-          operation: () => this.runExampleWithBase(example, build),
-        })),
-      );
-
-      const failed = results.filter((r: NamedResult<void>) => !r.success);
-      if (failed.length > 0) {
-        const failedNames = failed.map((r: NamedResult<void>) => r.name).join(", ");
-        throw new Error(`Examples failed: ${failedNames}`);
-      }
-
-      const exampleList = examples.join(", ");
-      return `All ${examples.length.toString()} examples built successfully: ${exampleList}`;
-    });
-  }
-
-  /**
    * Run the complete CI pipeline
    */
   @func()
@@ -118,30 +67,11 @@ export class AstroOpengraphImages {
 
       await withTiming("lint", () => deps.withExec(["bun", "run", "lint"]).stdout());
 
-      const build = deps.withExec(["bun", "run", "build"]);
-      await withTiming("build", () => build.stdout());
+      await withTiming("build", () => deps.withExec(["bun", "run", "build"]).stdout());
 
       await withTiming("test", () => deps.withExec(["bun", "run", "test"]).stdout());
 
-      const examples = await this.exampleNames(source);
-
-      await withTiming("test-examples", async () => {
-        const results = await runNamedParallel(
-          examples.map((example) => ({
-            name: example,
-            operation: () => this.runExampleWithBase(example, build),
-          })),
-        );
-
-        const failed = results.filter((r: NamedResult<void>) => !r.success);
-        if (failed.length > 0) {
-          const failedNames = failed.map((r: NamedResult<void>) => r.name).join(", ");
-          throw new Error(`Examples failed: ${failedNames}`);
-        }
-      });
-
-      const exampleList = examples.join(", ");
-      return `CI pipeline completed successfully. Tested ${examples.length.toString()} examples: ${exampleList}`;
+      return "CI pipeline completed successfully.";
     });
   }
 
@@ -282,7 +212,10 @@ export class AstroOpengraphImages {
       .withWorkdir(WORKDIR)
       .withEnvVariable("CI", "true")
       .withDirectory(WORKDIR, source, {
-        exclude: ["node_modules", "examples/*/node_modules", "**/.astro", "**/.dagger"],
+        // Examples are excluded because they reference the root package via "../../" which
+        // creates symlinks that point back to the project root, causing infinite recursion
+        // when Dagger snapshots the directory. Example tests run in GitHub Actions instead.
+        exclude: ["node_modules", "examples", "**/.astro", "**/.dagger"],
       });
   }
 
@@ -295,25 +228,5 @@ export class AstroOpengraphImages {
 
   private buildRoot(source: Directory): Container {
     return this.installDependencies(source).withExec(["bun", "run", "build"]);
-  }
-
-  private async exampleNames(source: Directory): Promise<string[]> {
-    const examplesDir = source.directory("examples");
-    const entries = await examplesDir.entries();
-    return entries
-      .map((entry) => entry.replace(/\/+$/, "")) // Strip trailing slashes from directory names
-      .filter((entry) => entry.trim().length > 0)
-      .sort();
-  }
-
-  private async runExampleWithBase(example: string, base: Container): Promise<void> {
-    const exampleWorkdir = `${WORKDIR}/examples/${example}`;
-    // Don't use node_modules cache for examples - local file references (../../) cause stale
-    // cache entries that fail with ENOENT or module resolution errors.
-    let container = base.withWorkdir(exampleWorkdir).withExec(["bun", "install", "--frozen-lockfile"]);
-
-    container = container.withExec(["bun", "run", "build"]);
-
-    await container.stdout();
   }
 }
