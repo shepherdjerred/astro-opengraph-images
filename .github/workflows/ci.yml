@@ -68,7 +68,8 @@ jobs:
       - name: Get Dagger Engine Pod Name
         run: |
           DAGGER_ENGINE_POD_NAME="$(kubectl get pod --selector=name=dagger-dagger-helm-engine --namespace=dagger --output=jsonpath='{.items[0].metadata.name}')"
-          echo "_EXPERIMENTAL_DAGGER_RUNNER_HOST=kube-pod://$DAGGER_ENGINE_POD_NAME?namespace=dagger" >> "$GITHUB_ENV"
+          DAGGER_ENGINE_CONTAINER="$(kubectl get pod --selector=name=dagger-dagger-helm-engine --namespace=dagger --output=jsonpath='{.items[0].spec.containers[0].name}')"
+          echo "_EXPERIMENTAL_DAGGER_RUNNER_HOST=kube-pod://$DAGGER_ENGINE_POD_NAME?namespace=dagger&container=$DAGGER_ENGINE_CONTAINER" >> "$GITHUB_ENV"
 
       - name: Install Dagger module dependencies
         working-directory: .dagger
@@ -105,5 +106,3 @@ jobs:
 permissions:
   contents: write
   pull-requests: write
-
-
