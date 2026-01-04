@@ -294,6 +294,46 @@ export async function simpleBlog({ title, description }: RenderFunctionInput): P
 }
 ```
 
+## Emoji Support
+
+By default, emojis in your page titles or descriptions will not render correctly because system fonts are disabled and standard fonts don't include emoji glyphs.
+
+To enable emoji support, use the `loadAdditionalAsset` option to fetch emoji images from a CDN like [Twemoji](https://github.com/jdecked/twemoji):
+
+```typescript
+import opengraphImages, { presets } from "astro-opengraph-images";
+import * as fs from "fs";
+
+export default defineConfig({
+  site: "https://example.com",
+  integrations: [
+    opengraphImages({
+      options: {
+        fonts: [
+          {
+            name: "Roboto",
+            weight: 400,
+            style: "normal",
+            data: fs.readFileSync("node_modules/@fontsource/roboto/files/roboto-latin-400-normal.woff"),
+          },
+        ],
+        loadAdditionalAsset: async (languageCode, segment) => {
+          if (languageCode === "emoji") {
+            // Fetch emoji SVG from Twemoji CDN
+            return `https://cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets/svg/${segment.codePointAt(0)?.toString(16)}.svg`;
+          }
+          // Return empty array for other assets (e.g., fallback fonts)
+          return [];
+        },
+      },
+      render: presets.blackAndWhite,
+    }),
+  ],
+});
+```
+
+The `loadAdditionalAsset` callback is called by [Satori](https://github.com/vercel/satori) whenever it encounters a character that isn't covered by the provided fonts. For emojis, returning an SVG URL will render the emoji correctly in your Open Graph images.
+
 ## Presets
 
 Presets are located in [`src/presets/`](https://github.com/shepherdjerred/astro-opengraph-images/tree/main/src/presets). [Open a pull request](https://github.com/shepherdjerred/astro-opengraph-images/compare) to contribute a preset you've created.
