@@ -118,6 +118,36 @@ jobs:
             exit $EXIT_CODE
           fi
 
+  # Example tests run in GHA instead of Dagger because the examples reference
+  # the root package via "../../" which creates symlinks that cause infinite
+  # recursion when Dagger snapshots the directory.
+  test-examples:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        example: [custom, preset]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install root dependencies and build
+        run: |
+          bun install --frozen-lockfile
+          bun run build
+
+      - name: Install example dependencies
+        working-directory: examples/${{ matrix.example }}
+        run: bun install --frozen-lockfile
+
+      - name: Build example
+        working-directory: examples/${{ matrix.example }}
+        run: bun run build
+
 permissions:
   contents: write
   pull-requests: write
