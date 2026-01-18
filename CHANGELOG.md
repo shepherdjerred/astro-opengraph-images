@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.14.1](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.14.0...v1.14.1) (2026-01-18)
+
+
+### Bug Fixes
+
+* **ci:** move example tests to GitHub Actions to avoid Dagger symlink loop ([ac92cbb](https://github.com/shepherdjerred/astro-opengraph-images/commit/ac92cbbf440a6fe19c3e9976fbe82447988c3273))
+* **deps:** update dependency @shepherdjerred/dagger-utils to ^0.6.0 ([82b7f14](https://github.com/shepherdjerred/astro-opengraph-images/commit/82b7f14aace728a8706c9ddd1b20e77e527d97be))
+* **deps:** update dependency satori to ^0.19.0 ([715a685](https://github.com/shepherdjerred/astro-opengraph-images/commit/715a68548bdf7b7ee3fd96c1ba80f04d1a7962a5))
+
 ## [1.14.0](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.13.1...v1.14.0) (2026-01-04)
 
 
