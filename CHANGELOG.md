@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.14.2](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.14.1...v1.14.2) (2026-01-20)
+
+
+### Bug Fixes
+
+* use bunx for npm publish in Dagger pipeline ([8777819](https://github.com/shepherdjerred/astro-opengraph-images/commit/8777819df948cced2aafc22811496947fc365393))
+
 ## [1.14.1](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.14.0...v1.14.1) (2026-01-18)
 
 
