@@ -131,7 +131,7 @@ export class AstroOpengraphImages {
       const container = this.installDependencies(source)
         .withExec(["bun", "run", "build"])
         .withSecretVariable("NPM_TOKEN", npmToken)
-        .withExec(["sh", "-c", 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc && npm publish']);
+        .withExec(["sh", "-c", 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc && bunx npm publish']);
 
       return container.stdout();
     });
@@ -195,7 +195,11 @@ export class AstroOpengraphImages {
           const container = this.installDependencies(source)
             .withExec(["bun", "run", "build"])
             .withSecretVariable("NPM_TOKEN", npmToken)
-            .withExec(["sh", "-c", 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc && npm publish']);
+            .withExec([
+              "sh",
+              "-c",
+              'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc && bunx npm publish',
+            ]);
           return container.stdout();
         });
         return `${ciResult}\nRelease PR: ${releasePrResult}\nGitHub Release: ${githubReleaseResult}\nPackage published to npm`;
