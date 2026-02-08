@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.14.3](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.14.2...v1.14.3) (2026-02-08)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @shepherdjerred/dagger-utils to ^0.8.0 ([c961730](https://github.com/shepherdjerred/astro-opengraph-images/commit/c9617302b044410dc23988a5c41bf68df41cefe6))
+* **deps:** update dependency jsdom to v28 ([8abd356](https://github.com/shepherdjerred/astro-opengraph-images/commit/8abd3568684c520fdb8357b8edaf6b7a5247dd79))
+
 ## [1.14.2](https://github.com/shepherdjerred/astro-opengraph-images/compare/v1.14.1...v1.14.2) (2026-01-20)
 
 
